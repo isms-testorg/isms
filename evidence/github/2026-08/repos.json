@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-08-11T11:43:59+00:00",
+  "collected_at": "2026-08-11T11:50:13+00:00",
   "collected_by": "evidence-collect",
   "count": 1,
   "evidence_kind": "repository inventory and visibility",
@@ -11,7 +11,7 @@
       "default_branch": "main",
       "has_issues": true,
       "name": "isms",
-      "pushed_at": "2026-08-11T11:43:41Z",
+      "pushed_at": "2026-08-11T11:44:02Z",
       "visibility": "public"
     }
   ],
