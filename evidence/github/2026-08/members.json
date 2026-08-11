@@ -1,0 +1,25 @@
+{
+  "2fa_coverage_percent": 100.0,
+  "admins": [
+    "0xJvl2an"
+  ],
+  "collected_at": "2026-08-11T11:50:11+00:00",
+  "collected_by": "evidence-collect",
+  "evidence_kind": "organisation members, roles and two factor authentication",
+  "members": [
+    "EinsBackstein"
+  ],
+  "organisation": "isms-testorg",
+  "outside_collaborators": [],
+  "settings": {
+    "default_repository_permission": null,
+    "members_can_create_public_repositories": true,
+    "two_factor_requirement_enabled": null,
+    "web_commit_signoff_required": false
+  },
+  "source": "GitHub REST API",
+  "total": 2,
+  "unavailable": [],
+  "without_2fa": [],
+  "without_2fa_count": 0
+}
