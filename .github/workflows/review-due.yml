@@ -1,0 +1,50 @@
+# Clause 7.5.3 in automation form: documents whose review date is approaching
+# or has passed get an issue assigned to their owner, and the issue closes
+# itself once the document has been reviewed. The trail of opened and closed
+# issues is the evidence that reviews actually happen.
+
+name: review-due
+
+on:
+  schedule:
+    # Mondays 06:00 UTC. A weekly cadence with a 30 day horizon means every
+    # document is flagged at least four times before it goes overdue.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      horizon_days:
+        description: How many days ahead to warn
+        default: "30"
+      include_drafts:
+        description: Also raise issues for documents never approved
+        type: boolean
+        default: false
+      dry_run:
+        description: Report only, create nothing
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  review-due:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install --disable-pip-version-check pyyaml
+
+      - name: Raise and close review issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 tools/review_due.py \
+            --horizon-days "${{ inputs.horizon_days || 30 }}" \
+            ${{ inputs.include_drafts && '--include-drafts' || '' }} \
+            ${{ inputs.dry_run && '--dry-run' || '' }}

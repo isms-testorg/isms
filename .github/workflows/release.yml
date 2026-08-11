@@ -1,0 +1,107 @@
+# Cut an auditor-ready release pack from a signed tag.
+#
+# The result is a zip containing the whole ISMS as PDF and DOCX in both
+# languages, the YAML it was generated from, a signature chain report, and
+# SHA256 checksums, published as a GitHub Release with build provenance
+# attestation. That bundle is what gets handed to an auditor or a customer.
+#
+# Tag it signed, or the chain report fails the build:
+#   git tag -s v1.0.0 -m "ISMS release 1.0.0" && git push origin v1.0.0
+
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version label for a dry run (no release is published)
+        default: dry-run
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history: the signature chain report walks every commit back to
+          # the previous tag.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install --disable-pip-version-check pyyaml
+
+      - name: Install Pandoc and XeLaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            pandoc texlive-xetex texlive-fonts-recommended texlive-latex-recommended
+
+      - name: Determine version
+        id: version
+        run: echo "value=${GITHUB_REF_NAME#refs/tags/}" >> "$GITHUB_OUTPUT"
+
+      # Strict mode fails on every warning, so a release cannot contain an
+      # undecided control, an unwritten justification, a draft document or a
+      # leftover TODO.
+      - name: Validate (strict)
+        run: python3 tools/check_isms.py --strict
+
+      - name: Render derived documents
+        run: python3 tools/render.py --out build
+
+      - name: Verify the signature chain
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tools/verify_chain.sh --github | tee build/signature-chain.txt
+
+      - name: Build the pack
+        env:
+          ISMS_VERSION: ${{ steps.version.outputs.value }}
+        run: |
+          python3 tools/build_docs.py --out build \
+            --format pdf --format docx --pack \
+            --version "${ISMS_VERSION}"
+
+      - uses: actions/attest-build-provenance@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          subject-path: build/isms-${{ steps.version.outputs.value }}.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: isms-${{ steps.version.outputs.value }}
+          path: build/isms-${{ steps.version.outputs.value }}.zip
+
+      - name: Publish the release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            build/isms-${{ steps.version.outputs.value }}.zip \
+            --title "ISMS ${GITHUB_REF_NAME}" \
+            --verify-tag \
+            --notes "ISO/IEC 27001:2022 documentation pack, English and German.
+
+          Contents: the full ISMS as PDF and DOCX per language, the \`data/\` YAML it was
+          generated from, \`signature-chain.txt\` proving every commit since the previous
+          tag is signed, and \`SHA256SUMS\`.
+
+          Verify the tag and the artifact:
+
+          \`\`\`
+          git verify-tag ${GITHUB_REF_NAME}
+          gh attestation verify isms-${{ steps.version.outputs.value }}.zip --repo ${GITHUB_REPOSITORY}
+          sha256sum -c SHA256SUMS
+          \`\`\`"

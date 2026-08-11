@@ -1,0 +1,50 @@
+# Required status check for main. If this fails, the merge would leave the
+# management system internally inconsistent: a policy pointing at a control
+# that does not exist, a risk treated by an excluded control, a review date
+# that does not match the review cycle, or the two languages out of sync.
+
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --disable-pip-version-check pyyaml
+
+      # A validator that stopped firing would turn every later step into a
+      # green tick that means nothing, so it is tested before it is trusted.
+      - name: Test the validator
+        run: make test
+
+      - name: Validate the ISMS
+        run: python3 tools/check_isms.py
+
+      - name: Render the derived documents
+        run: python3 tools/render.py --out build
+
+      - name: Assemble the document pack
+        run: python3 tools/build_docs.py --out build --version "pr-${{ github.event.pull_request.number || github.sha }}"
+
+      # Rendering is not committed, so this is the only way to read the
+      # resulting Statement of Applicability before approving a change.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: isms-preview
+          path: build/
+          retention-days: 14

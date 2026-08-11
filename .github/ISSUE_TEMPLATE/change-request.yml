@@ -1,0 +1,46 @@
+name: ISMS change request
+description: Propose a change to a policy, procedure, control or risk entry
+title: "[change] "
+labels: ["isms:change-request"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What should change
+      description: Which document, control or risk entry, and what is wrong or missing today.
+    validations:
+      required: true
+  - type: dropdown
+    id: driver
+    attributes:
+      label: Driver
+      options:
+        - Risk assessment result
+        - Incident or nonconformity
+        - Audit finding
+        - Legal / regulatory / contractual requirement
+        - New or changed system, supplier or process
+        - Periodic review
+        - Editorial
+    validations:
+      required: true
+  - type: input
+    id: controls
+    attributes:
+      label: Annex A controls affected
+      placeholder: "A.5.15, A.8.2"
+  - type: input
+    id: risks
+    attributes:
+      label: Risk ids affected
+      placeholder: "R-004, R-011"
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency
+      options:
+        - Next scheduled review cycle
+        - Within 30 days
+        - Immediate (control is ineffective right now)
+    validations:
+      required: true

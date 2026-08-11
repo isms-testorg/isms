@@ -1,0 +1,16 @@
+# Build output — never committed, rendered from data/ at release time
+build/
+*.pdf
+*.docx
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,53 @@
+name: Information security incident
+description: Record a security event or incident (A.5.24 - A.5.27, A.6.8)
+title: "[incident] "
+labels: ["isms:incident"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Do not put credentials, personal data or attacker-supplied payloads in
+        this issue.** Reference where that material is stored instead.
+
+        If a personal data breach is possible, the GDPR 72 hour notification
+        clock may already be running. Escalate before finishing this form.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: input
+    id: detected
+    attributes:
+      label: Detected at (UTC)
+      placeholder: "2026-08-10T14:05Z"
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - "1 - critical: confirmed loss of confidentiality, integrity or availability of production data"
+        - "2 - high: contained but material impact"
+        - "3 - medium: limited impact, no data affected"
+        - "4 - low: event, no impact confirmed"
+    validations:
+      required: true
+  - type: dropdown
+    id: pii
+    attributes:
+      label: Personal data possibly affected
+      options: ["unknown", "no", "yes"]
+    validations:
+      required: true
+  - type: textarea
+    id: containment
+    attributes:
+      label: Containment and recovery actions
+  - type: textarea
+    id: lessons
+    attributes:
+      label: Lessons learned (A.5.27)
+      description: Fill in before closing. Link any nonconformity issue raised as a result.

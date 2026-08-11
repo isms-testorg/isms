@@ -1,0 +1,33 @@
+# Approval record for the ISMS.
+#
+# A merge into main requires review from the owner listed here. Combined with
+# branch protection this enforces approver != author, which is the evidence an
+# auditor looks for under ISO/IEC 27001:2022 clause 7.5.2 (approval of
+# documented information).
+#
+# Replace the placeholder handles below with real GitHub accounts before
+# enabling branch protection. Teams (@org/team) are preferred over individuals
+# so that approval does not depend on one person being available.
+
+# Fallback: anything not matched more specifically
+*                       @rssoftwaregmbh/isms-owners
+
+# Data layer — changes here move the SoA and the risk picture
+/data/                  @rssoftwaregmbh/isms-owners
+/data/risks.yml         @rssoftwaregmbh/isms-owners
+/data/soa.yml           @rssoftwaregmbh/isms-owners
+
+# Automation — a change here can weaken every check
+/tools/                 @rssoftwaregmbh/isms-owners
+/.github/               @rssoftwaregmbh/isms-owners
+
+# Governing documents (clause 4-10)
+/docs/en/00-context/    @rssoftwaregmbh/isms-owners
+/docs/de/00-context/    @rssoftwaregmbh/isms-owners
+/docs/en/20-procedures/ @rssoftwaregmbh/isms-owners
+/docs/de/20-procedures/ @rssoftwaregmbh/isms-owners
+
+# Topic policies — delegate per area once owners are known, e.g.
+# /docs/*/10-policies/secure-development-policy.md  @rssoftwaregmbh/engineering
+/docs/en/10-policies/   @rssoftwaregmbh/isms-owners
+/docs/de/10-policies/   @rssoftwaregmbh/isms-owners

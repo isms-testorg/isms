@@ -1,0 +1,61 @@
+name: Nonconformity / corrective action
+description: Record a nonconformity and drive it to closure (clause 10.1)
+title: "[nc] "
+labels: ["isms:nonconformity"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is the corrective action record required by ISO/IEC 27001:2022
+        clause 10.1. Do not close it until the effectiveness check is done.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the nonconformity
+      description: What happened, what requirement was not met, when and where it was found.
+    validations:
+      required: true
+  - type: dropdown
+    id: source
+    attributes:
+      label: How it was found
+      options:
+        - Internal audit
+        - External audit
+        - Management review
+        - Incident
+        - Automated check (CI)
+        - Reported by staff
+        - Supplier or customer
+    validations:
+      required: true
+  - type: input
+    id: requirement
+    attributes:
+      label: Requirement not met
+      placeholder: "Clause 9.2 / A.8.8 / internal policy pol-access-control"
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Immediate correction
+      description: What was done straight away to contain the situation.
+  - type: textarea
+    id: rootcause
+    attributes:
+      label: Root cause analysis
+      description: Why it happened. Not a restatement of the symptom.
+    validations:
+      required: true
+  - type: textarea
+    id: action
+    attributes:
+      label: Corrective action, owner and due date
+    validations:
+      required: true
+  - type: textarea
+    id: effectiveness
+    attributes:
+      label: Effectiveness check
+      description: How and when it will be confirmed that the cause is actually gone. Fill in before closing.
