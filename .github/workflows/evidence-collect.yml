@@ -56,7 +56,7 @@ jobs:
           MONTH="${MONTH:-$(date -u +%Y-%m)}"
           BRANCH="isms/evidence-${MONTH}"
 
-          FILES=$(git status --porcelain evidence/ | awk '{print $2}')
+          FILES=$(git ls-files --others --modified --exclude-standard evidence/)
           if [ -z "$FILES" ]; then
             echo "No change in the collected evidence, nothing to commit."
             exit 0
