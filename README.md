@@ -120,7 +120,7 @@ frontmatter with real handles.
 **3. Branch protection.** With the team in place:
 
 ```bash
-gh api -X PUT repos/rssoftwaregmbh/ISMS-Automation/branches/main/protection \
+gh api -X PUT repos/isms-testorg/ISMS-Automation/branches/main/protection \
   --input - <<'JSON'
 {
   "required_status_checks": { "strict": true, "contexts": ["validate"] },

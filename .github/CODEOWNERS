@@ -10,24 +10,24 @@
 # so that approval does not depend on one person being available.
 
 # Fallback: anything not matched more specifically
-*                       @rssoftwaregmbh/isms-owners
+*                       @isms-testorg/dev-isms-owner
 
 # Data layer — changes here move the SoA and the risk picture
-/data/                  @rssoftwaregmbh/isms-owners
-/data/risks.yml         @rssoftwaregmbh/isms-owners
-/data/soa.yml           @rssoftwaregmbh/isms-owners
+/data/                  @isms-testorg/dev-isms-owner
+/data/risks.yml         @isms-testorg/dev-isms-owner
+/data/soa.yml           @isms-testorg/dev-isms-owner
 
 # Automation — a change here can weaken every check
-/tools/                 @rssoftwaregmbh/isms-owners
-/.github/               @rssoftwaregmbh/isms-owners
+/tools/                 @isms-testorg/dev-isms-owner
+/.github/               @isms-testorg/dev-isms-owner
 
 # Governing documents (clause 4-10)
-/docs/en/00-context/    @rssoftwaregmbh/isms-owners
-/docs/de/00-context/    @rssoftwaregmbh/isms-owners
-/docs/en/20-procedures/ @rssoftwaregmbh/isms-owners
-/docs/de/20-procedures/ @rssoftwaregmbh/isms-owners
+/docs/en/00-context/    @isms-testorg/dev-isms-owner
+/docs/de/00-context/    @isms-testorg/dev-isms-owner
+/docs/en/20-procedures/ @isms-testorg/dev-isms-owner
+/docs/de/20-procedures/ @isms-testorg/dev-isms-owner
 
 # Topic policies — delegate per area once owners are known, e.g.
-# /docs/*/10-policies/secure-development-policy.md  @rssoftwaregmbh/engineering
-/docs/en/10-policies/   @rssoftwaregmbh/isms-owners
-/docs/de/10-policies/   @rssoftwaregmbh/isms-owners
+# /docs/*/10-policies/secure-development-policy.md  @isms-testorg/engineering
+/docs/en/10-policies/   @isms-testorg/dev-isms-owner
+/docs/de/10-policies/   @isms-testorg/dev-isms-owner

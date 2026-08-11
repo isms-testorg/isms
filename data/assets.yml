@@ -15,7 +15,7 @@ asset_groups:
     type: information
     owner: "@TODO-engineering-lead"
     classification: confidential
-    location: GitHub (rssoftwaregmbh organisation)
+    location: GitHub (isms-testorg organisation)
     register: "evidence/github/ — collected monthly by CI"
     cia: { c: 4, i: 5, a: 3 }
 
