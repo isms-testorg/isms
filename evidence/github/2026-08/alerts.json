@@ -1,0 +1,21 @@
+{
+  "collected_at": "2026-08-11T11:44:00+00:00",
+  "collected_by": "evidence-collect",
+  "dependabot_open_total": 0,
+  "evidence_kind": "open vulnerability and secret scanning alerts",
+  "organisation": "isms-testorg",
+  "repositories": [
+    {
+      "dependabot": {
+        "unavailable": "gh: Resource not accessible by personal access token (HTTP 403)"
+      },
+      "repository": "isms",
+      "secret_scanning": {
+        "unavailable": "gh: Resource not accessible by personal access token (HTTP 403)"
+      }
+    }
+  ],
+  "secret_scanning_open_total": 0,
+  "source": "GitHub REST API",
+  "unavailable": []
+}
