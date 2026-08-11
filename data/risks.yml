@@ -46,7 +46,7 @@ risks:
     threat_de: Phishing von Zugangsdaten oder Wiederverwendung eines geleakten Passworts gegen die GitHub-Organisation
     vulnerability_en: Accounts without phishing resistant multi factor authentication
     vulnerability_de: Konten ohne phishing-resistente Mehrfaktor-Authentisierung
-    owner: "@TODO-engineering-lead"
+    owner: "@isms-testorg/dev-engineering-lead"
     likelihood: 4
     impact: 4
     treatment: modify
@@ -66,7 +66,7 @@ risks:
     threat_de: Automatisiertes Durchsuchen öffentlicher und geleakter Repositories nach Zugangsdaten
     vulnerability_en: Secrets pasted into code or configuration instead of the secret manager
     vulnerability_de: Geheimnisse werden in Code oder Konfiguration eingefügt statt in den Secret Manager
-    owner: "@TODO-cto"
+    owner: "@isms-testorg/dev-cto"
     likelihood: 3
     impact: 5
     treatment: modify
@@ -86,7 +86,7 @@ risks:
     threat_de: Ausnutzung einer öffentlich bekannten Schwachstelle in einer Open-Source-Komponente
     vulnerability_en: No enforced patch deadline and no inventory of shipped components
     vulnerability_de: Keine verbindliche Patch-Frist und kein Inventar ausgelieferter Komponenten
-    owner: "@TODO-engineering-lead"
+    owner: "@isms-testorg/dev-engineering-lead"
     likelihood: 4
     impact: 4
     treatment: modify
@@ -106,7 +106,7 @@ risks:
     threat_de: Diebstahl auf Reisen oder im Homeoffice
     vulnerability_en: Devices without enforced full disk encryption and screen lock
     vulnerability_de: Geräte ohne erzwungene Festplattenverschlüsselung und Bildschirmsperre
-    owner: "@TODO-it-lead"
+    owner: "@isms-testorg/dev-it-lead"
     likelihood: 3
     impact: 3
     treatment: modify
@@ -126,7 +126,7 @@ risks:
     threat_de: Regionaler Anbieterausfall oder Kontosperrung
     vulnerability_en: Single region deployment, recovery objectives never tested
     vulnerability_de: Bereitstellung in nur einer Region, Wiederherstellungsziele nie getestet
-    owner: "@TODO-cto"
+    owner: "@isms-testorg/dev-cto"
     likelihood: 2
     impact: 4
     treatment: modify
@@ -146,7 +146,7 @@ risks:
     threat_de: Lieferant mit schwachen Sicherheitspraktiken oder nicht offengelegter Unterauftragsverarbeiter
     vulnerability_en: No security requirements in supplier contracts and no periodic review
     vulnerability_de: Keine Sicherheitsanforderungen in Lieferantenverträgen und keine regelmäßige Überprüfung
-    owner: "@TODO-managing-director"
+    owner: "@isms-testorg/dev-managing-director"
     likelihood: 3
     impact: 4
     treatment: modify
@@ -166,7 +166,7 @@ risks:
     threat_de: Kündigung, Langzeiterkrankung oder Unfall
     vulnerability_en: Single points of knowledge, operating procedures not written down
     vulnerability_de: Einzelne Wissensträger, Betriebsabläufe nicht dokumentiert
-    owner: "@TODO-managing-director"
+    owner: "@isms-testorg/dev-managing-director"
     likelihood: 3
     impact: 3
     treatment: modify
@@ -186,7 +186,7 @@ risks:
     threat_de: Schadsoftware über Phishing oder ein kompromittiertes Software-Update
     vulnerability_en: Backups reachable with the same credentials as the systems they protect
     vulnerability_de: Sicherungen mit denselben Zugangsdaten erreichbar wie die gesicherten Systeme
-    owner: "@TODO-it-lead"
+    owner: "@isms-testorg/dev-it-lead"
     likelihood: 3
     impact: 5
     treatment: modify

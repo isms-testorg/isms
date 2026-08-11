@@ -113,9 +113,8 @@ authentication key): Settings → SSH and GPG keys → New SSH key → type
 "Signing Key". Without that step GitHub shows commits as Unverified and the
 release chain report fails.
 
-**2. Team and owners.** Create the `isms-owners` team, then replace every
-`@TODO-*` placeholder in `.github/CODEOWNERS`, `data/*.yml` and the document
-frontmatter with real handles.
+**2. Team and owners.** Confirm the organisation teams in `.github/CODEOWNERS`,
+`data/*.yml` and the document frontmatter use real GitHub team handles.
 
 **3. Branch protection.** With the team in place:
 

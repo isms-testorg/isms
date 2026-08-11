@@ -18,7 +18,7 @@ objectives:
     target: "100% of GitHub organisation members with 2FA enabled"
     measurement: "Monthly evidence collection from the GitHub organisation members API"
     baseline: "TODO: record the value from the first evidence collection run"
-    responsible: "@TODO-it-lead"
+    responsible: "@isms-testorg/dev-it-lead"
     resources: Existing tooling, no additional budget
     due: 2026-12-31
     risks: [R-001]
@@ -32,7 +32,7 @@ objectives:
     target: "95% of critical within 7 days, high within 30 days"
     measurement: "Dependabot and secret scanning alert ages from monthly evidence collection"
     baseline: "TODO: record the value from the first evidence collection run"
-    responsible: "@TODO-engineering-lead"
+    responsible: "@isms-testorg/dev-engineering-lead"
     resources: Engineering capacity reserved in each sprint
     due: 2026-12-31
     risks: [R-003, R-002]
@@ -46,7 +46,7 @@ objectives:
     target: "At least one documented full restore test per critical service per year, within the defined RTO"
     measurement: "Restore test records in evidence/, reviewed at management review"
     baseline: "No test performed to date"
-    responsible: "@TODO-cto"
+    responsible: "@isms-testorg/dev-cto"
     resources: One engineering day per service per test
     due: 2027-03-31
     risks: [R-005, R-008]
@@ -60,7 +60,7 @@ objectives:
     target: "0 documents overdue at any month end"
     measurement: "Weekly automated review-due check; count of open isms:review-due issues older than 30 days"
     baseline: "Not applicable, ISMS newly established"
-    responsible: "@TODO-isms-owner"
+    responsible: "@isms-testorg/dev-isms-owner"
     resources: Existing tooling
     due: 2026-12-31
     risks: [R-007]
@@ -74,7 +74,7 @@ objectives:
     target: "100% of staff within 30 days of joining, and annually thereafter"
     measurement: "Training completion records, reviewed quarterly"
     baseline: "TODO: current completion rate"
-    responsible: "@TODO-managing-director"
+    responsible: "@isms-testorg/dev-managing-director"
     resources: Training platform subscription
     due: 2026-12-31
     risks: [R-001, R-008]

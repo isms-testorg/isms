@@ -19,7 +19,7 @@ evidence:
     controls: [A.5.15, A.5.16, A.5.18, A.6.5, A.8.2, A.8.5]
     objectives: [OBJ-01]
     valid_months: 3
-    owner: "@TODO-it-lead"
+    owner: "@isms-testorg/dev-it-lead"
 
   - id: EV-GH-REPOS
     title_en: Repository protection settings and visibility
@@ -28,7 +28,7 @@ evidence:
     collector: github
     controls: [A.8.4, A.8.31, A.8.32, A.5.36]
     valid_months: 3
-    owner: "@TODO-engineering-lead"
+    owner: "@isms-testorg/dev-engineering-lead"
 
   - id: EV-GH-BRANCH
     title_en: Branch protection and required reviews on default branches
@@ -37,7 +37,7 @@ evidence:
     collector: github
     controls: [A.5.3, A.8.4, A.8.28, A.8.31, A.8.32]
     valid_months: 3
-    owner: "@TODO-engineering-lead"
+    owner: "@isms-testorg/dev-engineering-lead"
 
   - id: EV-GH-ALERTS
     title_en: Dependabot and secret scanning alert summary
@@ -47,7 +47,7 @@ evidence:
     controls: [A.8.8, A.8.16, A.5.7]
     objectives: [OBJ-02]
     valid_months: 3
-    owner: "@TODO-engineering-lead"
+    owner: "@isms-testorg/dev-engineering-lead"
 
   # --- Manual evidence: create the file, then uncomment and fill in ---
   #
@@ -58,7 +58,7 @@ evidence:
   #   controls: [A.8.13, A.5.30]
   #   objectives: [OBJ-03]
   #   valid_months: 12
-  #   owner: "@TODO-cto"
+  #   owner: "@isms-testorg/dev-cto"
   #
   # - id: EV-TRAINING
   #   title_en: Security awareness training completion records
@@ -67,4 +67,4 @@ evidence:
   #   controls: [A.6.3]
   #   objectives: [OBJ-05]
   #   valid_months: 12
-  #   owner: "@TODO-managing-director"
+  #   owner: "@isms-testorg/dev-managing-director"
