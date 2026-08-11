@@ -1,0 +1,81 @@
+# Clause 6.2 — information security objectives.
+#
+# Clause 6.2 requires objectives to be measurable, monitored and to have a
+# plan: what will be done, what resources, who is responsible, when it is
+# complete, how the result is evaluated. Every field below maps to one of
+# those requirements, so do not leave them blank.
+#
+# `measurement` is also the clause 9.1 monitoring definition for the objective.
+
+period: "2026"
+
+objectives:
+  - id: OBJ-01
+    title_en: Every organisation member uses multi factor authentication
+    title_de: Jedes Organisationsmitglied verwendet Mehrfaktor-Authentisierung
+    rationale_en: Directly reduces R-001, the highest scoring credential risk
+    rationale_de: Reduziert unmittelbar R-001, das höchstbewertete Zugangsdatenrisiko
+    target: "100% of GitHub organisation members with 2FA enabled"
+    measurement: "Monthly evidence collection from the GitHub organisation members API"
+    baseline: "TODO: record the value from the first evidence collection run"
+    responsible: "@TODO-it-lead"
+    resources: Existing tooling, no additional budget
+    due: 2026-12-31
+    risks: [R-001]
+    status: in_progress
+
+  - id: OBJ-02
+    title_en: Critical and high vulnerabilities are remediated within the agreed deadline
+    title_de: Kritische und hohe Schwachstellen werden innerhalb der vereinbarten Frist behoben
+    rationale_en: Addresses R-003, exploitation of a known vulnerability in a delivered product
+    rationale_de: Adressiert R-003, Ausnutzung einer bekannten Schwachstelle in einem ausgelieferten Produkt
+    target: "95% of critical within 7 days, high within 30 days"
+    measurement: "Dependabot and secret scanning alert ages from monthly evidence collection"
+    baseline: "TODO: record the value from the first evidence collection run"
+    responsible: "@TODO-engineering-lead"
+    resources: Engineering capacity reserved in each sprint
+    due: 2026-12-31
+    risks: [R-003, R-002]
+    status: in_progress
+
+  - id: OBJ-03
+    title_en: Backup restore is tested and the result documented
+    title_de: Wiederherstellung aus Sicherungen wird getestet und das Ergebnis dokumentiert
+    rationale_en: R-005 and R-008 both assume recovery works, which has never been proven
+    rationale_de: R-005 und R-008 setzen beide voraus, dass die Wiederherstellung funktioniert, was nie nachgewiesen wurde
+    target: "At least one documented full restore test per critical service per year, within the defined RTO"
+    measurement: "Restore test records in evidence/, reviewed at management review"
+    baseline: "No test performed to date"
+    responsible: "@TODO-cto"
+    resources: One engineering day per service per test
+    due: 2027-03-31
+    risks: [R-005, R-008]
+    status: planned
+
+  - id: OBJ-04
+    title_en: No ISMS document is past its review date
+    title_de: Kein ISMS-Dokument ist über sein Überprüfungsdatum hinaus
+    rationale_en: A stale management system fails clause 7.5.3 and misleads everyone who reads it
+    rationale_de: Ein veraltetes Managementsystem verstößt gegen Abschnitt 7.5.3 und führt jeden Lesenden in die Irre
+    target: "0 documents overdue at any month end"
+    measurement: "Weekly automated review-due check; count of open isms:review-due issues older than 30 days"
+    baseline: "Not applicable, ISMS newly established"
+    responsible: "@TODO-isms-owner"
+    resources: Existing tooling
+    due: 2026-12-31
+    risks: [R-007]
+    status: in_progress
+
+  - id: OBJ-05
+    title_en: All staff complete security awareness training
+    title_de: Alle Mitarbeitenden absolvieren eine Sicherheitsschulung
+    rationale_en: Phishing is the delivery mechanism in R-001 and R-008
+    rationale_de: Phishing ist der Übertragungsweg in R-001 und R-008
+    target: "100% of staff within 30 days of joining, and annually thereafter"
+    measurement: "Training completion records, reviewed quarterly"
+    baseline: "TODO: current completion rate"
+    responsible: "@TODO-managing-director"
+    resources: Training platform subscription
+    due: 2026-12-31
+    risks: [R-001, R-008]
+    status: planned

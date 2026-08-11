@@ -1,0 +1,70 @@
+# Index of evidence held in evidence/.
+#
+# Two kinds of entries:
+#   collector: <name>  -> written automatically by a workflow, glob may expand
+#                         to many dated files. Do not hand edit these.
+#   (no collector)     -> manual evidence, someone put a file in evidence/ and
+#                         has to record it here.
+#
+# tools/check_isms.py enforces that every path resolves to at least one real
+# file, that nothing in evidence/ is unindexed, and that nothing is past
+# valid_months since its newest file.
+
+evidence:
+  - id: EV-GH-MEMBERS
+    title_en: GitHub organisation members, roles and 2FA state
+    title_de: Mitglieder, Rollen und 2FA-Status der GitHub-Organisation
+    path: "evidence/github/*/members.json"
+    collector: github
+    controls: [A.5.15, A.5.16, A.5.18, A.6.5, A.8.2, A.8.5]
+    objectives: [OBJ-01]
+    valid_months: 3
+    owner: "@TODO-it-lead"
+
+  - id: EV-GH-REPOS
+    title_en: Repository protection settings and visibility
+    title_de: Schutzeinstellungen und Sichtbarkeit der Repositories
+    path: "evidence/github/*/repos.json"
+    collector: github
+    controls: [A.8.4, A.8.31, A.8.32, A.5.36]
+    valid_months: 3
+    owner: "@TODO-engineering-lead"
+
+  - id: EV-GH-BRANCH
+    title_en: Branch protection and required reviews on default branches
+    title_de: Branch-Schutz und erforderliche Reviews auf Standard-Branches
+    path: "evidence/github/*/branch_protection.json"
+    collector: github
+    controls: [A.5.3, A.8.4, A.8.28, A.8.31, A.8.32]
+    valid_months: 3
+    owner: "@TODO-engineering-lead"
+
+  - id: EV-GH-ALERTS
+    title_en: Dependabot and secret scanning alert summary
+    title_de: Zusammenfassung der Dependabot- und Secret-Scanning-Warnungen
+    path: "evidence/github/*/alerts.json"
+    collector: github
+    controls: [A.8.8, A.8.16, A.5.7]
+    objectives: [OBJ-02]
+    valid_months: 3
+    owner: "@TODO-engineering-lead"
+
+  # --- Manual evidence: create the file, then uncomment and fill in ---
+  #
+  # - id: EV-RESTORE-TEST
+  #   title_en: Backup restore test record
+  #   title_de: Nachweis des Wiederherstellungstests
+  #   path: "evidence/manual/2026-restore-test.md"
+  #   controls: [A.8.13, A.5.30]
+  #   objectives: [OBJ-03]
+  #   valid_months: 12
+  #   owner: "@TODO-cto"
+  #
+  # - id: EV-TRAINING
+  #   title_en: Security awareness training completion records
+  #   title_de: Nachweise über absolvierte Sicherheitsschulungen
+  #   path: "evidence/manual/2026-awareness-training.csv"
+  #   controls: [A.6.3]
+  #   objectives: [OBJ-05]
+  #   valid_months: 12
+  #   owner: "@TODO-managing-director"

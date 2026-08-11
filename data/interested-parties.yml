@@ -1,0 +1,71 @@
+# Clause 4.2 — interested parties and their requirements.
+#
+# Rendered into the context document. Keep requirements concrete enough that
+# each one can be traced to a control, a policy or a contractual obligation;
+# "wants security" is not a requirement an auditor can test.
+
+interested_parties:
+  - id: IP-CUST
+    name_en: Customers
+    name_de: Kunden
+    requirements_en:
+      - Confidentiality and integrity of the data they entrust to us
+      - Agreed availability of the delivered services
+      - Notification of incidents that affect their data, within contractual deadlines
+      - Evidence of a certified or at least documented security management system
+    requirements_de:
+      - Vertraulichkeit und Integrität der uns anvertrauten Daten
+      - Vereinbarte Verfügbarkeit der gelieferten Dienste
+      - Benachrichtigung über Vorfälle, die ihre Daten betreffen, innerhalb vertraglicher Fristen
+      - Nachweis eines zertifizierten oder zumindest dokumentierten Sicherheitsmanagementsystems
+    monitored_via: Contract reviews, customer security questionnaires, incident notifications
+
+  - id: IP-EMP
+    name_en: Employees and contractors
+    name_de: Mitarbeitende und Auftragnehmer
+    requirements_en:
+      - Clear and workable security rules that do not block the job
+      - Protection of their personal data
+      - Training appropriate to their role
+    requirements_de:
+      - Klare und praktikable Sicherheitsregeln, die die Arbeit nicht blockieren
+      - Schutz ihrer personenbezogenen Daten
+      - Rollenangemessene Schulung
+    monitored_via: Awareness training records, feedback in management review
+
+  - id: IP-REG
+    name_en: Regulators and supervisory authorities
+    name_de: Regulierungs- und Aufsichtsbehörden
+    requirements_en:
+      - Compliance with the GDPR, including breach notification within 72 hours
+      - "TODO: confirm whether NIS2 national transposition applies to the organisation"
+      - Retention of records as required by commercial and tax law
+    requirements_de:
+      - Einhaltung der DSGVO, einschließlich Meldung von Verletzungen innerhalb von 72 Stunden
+      - "TODO: prüfen, ob die nationale NIS2-Umsetzung auf die Organisation anwendbar ist"
+      - Aufbewahrung von Aufzeichnungen nach handels- und steuerrechtlichen Vorgaben
+    monitored_via: Legal register review, at least annually
+
+  - id: IP-SUP
+    name_en: Suppliers and cloud providers
+    name_de: Lieferanten und Cloud-Anbieter
+    requirements_en:
+      - Acceptable use of their services
+      - Timely payment and clear points of contact
+    requirements_de:
+      - Zulässige Nutzung ihrer Dienste
+      - Fristgerechte Zahlung und klare Ansprechpartner
+    monitored_via: Supplier register review
+
+  - id: IP-OWN
+    name_en: Owners and management
+    name_de: Eigentümer und Geschäftsführung
+    requirements_en:
+      - Security spend proportionate to the actual risk
+      - No interruption of revenue generating operations
+      - Ability to win contracts that require a certificate
+    requirements_de:
+      - Sicherheitsausgaben im Verhältnis zum tatsächlichen Risiko
+      - Keine Unterbrechung des umsatzrelevanten Betriebs
+      - Fähigkeit, Aufträge zu gewinnen, die ein Zertifikat voraussetzen
+    monitored_via: Management review, clause 9.3

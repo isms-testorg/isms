@@ -1,0 +1,95 @@
+# Asset groups, not individual items.
+#
+# ISO/IEC 27001:2022 A.5.9 asks for an inventory of information and other
+# associated assets. Groups keep this maintainable: an auditor wants to see
+# that every category of asset has an owner and a classification, not a list of
+# every laptop. Where a per-item register exists elsewhere (MDM, cloud
+# inventory), point at it with `register` instead of duplicating it here.
+#
+# classification must be one of: public, internal, confidential, restricted
+
+asset_groups:
+  - id: AG-SRC
+    name_en: Source code and build pipelines
+    name_de: Quellcode und Build-Pipelines
+    type: information
+    owner: "@TODO-engineering-lead"
+    classification: confidential
+    location: GitHub (rssoftwaregmbh organisation)
+    register: "evidence/github/ — collected monthly by CI"
+    cia: { c: 4, i: 5, a: 3 }
+
+  - id: AG-CUSTDATA
+    name_en: Customer production data
+    name_de: Produktivdaten von Kunden
+    type: information
+    owner: "@TODO-cto"
+    classification: restricted
+    location: "TODO: production hosting provider and region"
+    register: "TODO: link to the record of processing activities (GDPR Art. 30)"
+    cia: { c: 5, i: 5, a: 4 }
+
+  - id: AG-CREDS
+    name_en: Secrets and credentials
+    name_de: Geheimnisse und Zugangsdaten
+    type: information
+    owner: "@TODO-cto"
+    classification: restricted
+    location: "TODO: secret manager, GitHub Actions secrets"
+    cia: { c: 5, i: 5, a: 4 }
+
+  - id: AG-ENDPOINT
+    name_en: Employee endpoint devices
+    name_de: Endpunktgeräte der Mitarbeitenden
+    type: hardware
+    owner: "@TODO-it-lead"
+    classification: internal
+    location: Distributed, including home offices
+    register: "TODO: MDM inventory export"
+    cia: { c: 4, i: 3, a: 3 }
+
+  - id: AG-SAAS
+    name_en: SaaS and cloud services
+    name_de: SaaS- und Cloud-Dienste
+    type: service
+    owner: "@TODO-it-lead"
+    classification: internal
+    location: External providers
+    register: "TODO: supplier register"
+    cia: { c: 4, i: 4, a: 4 }
+
+  - id: AG-IDENTITY
+    name_en: Identity and access management
+    name_de: Identitäts- und Zugangsverwaltung
+    type: service
+    owner: "@TODO-it-lead"
+    classification: restricted
+    location: "TODO: identity provider"
+    cia: { c: 5, i: 5, a: 5 }
+
+  - id: AG-DOCS
+    name_en: Business and ISMS documentation
+    name_de: Geschäfts- und ISMS-Dokumentation
+    type: information
+    owner: "@TODO-isms-owner"
+    classification: internal
+    location: This repository and the document management system
+    cia: { c: 3, i: 5, a: 3 }
+
+  - id: AG-PEOPLE
+    name_en: Personnel and know-how
+    name_de: Personal und Know-how
+    type: people
+    owner: "@TODO-managing-director"
+    classification: internal
+    location: Organisation-wide
+    cia: { c: 4, i: 3, a: 4 }
+
+  - id: AG-OFFICE
+    name_en: Office premises and infrastructure
+    name_de: Büroräumlichkeiten und Infrastruktur
+    type: physical
+    owner: "@TODO-managing-director"
+    classification: internal
+    location: "TODO: office addresses in scope"
+    cia: { c: 3, i: 2, a: 3 }

@@ -1,0 +1,199 @@
+# Risk register — hybrid method.
+#
+# Risks are written as scenarios (threat exploiting a weakness, with a
+# consequence) and each references one or more asset groups from assets.yml.
+# That keeps the count manageable while still tying every risk to something in
+# the A.5.9 inventory, which is what an auditor traces.
+#
+# score = likelihood x impact, both 1..5. Residual score uses the same scale
+# after the treatment controls are in place and working.
+#
+# Every risk with treatment "modify" must reference at least one Annex A
+# control. tools/check_isms.py enforces that.
+
+meta:
+  scale:
+    likelihood:
+      1: { en: Rare - not expected within 5 years, de: Selten - in 5 Jahren nicht erwartet }
+      2: { en: Unlikely - possible within 5 years, de: Unwahrscheinlich - innerhalb von 5 Jahren möglich }
+      3: { en: Possible - expected within 3 years, de: Möglich - innerhalb von 3 Jahren erwartet }
+      4: { en: Likely - expected within 1 year, de: Wahrscheinlich - innerhalb eines Jahres erwartet }
+      5: { en: Almost certain - expected within 3 months, de: Fast sicher - innerhalb von 3 Monaten erwartet }
+    impact:
+      1: { en: Negligible, de: Vernachlässigbar }
+      2: { en: Minor - internal disruption only, de: Gering - nur interne Störung }
+      3: { en: Moderate - customer visible, recoverable, de: Mittel - für Kunden sichtbar, behebbar }
+      4: { en: Major - contractual or regulatory consequences, de: Hoch - vertragliche oder regulatorische Folgen }
+      5: { en: Severe - existence threatening or mass data breach, de: Sehr hoch - existenzbedrohend oder Massendatenschutzverletzung }
+  bands:
+    - { max: 4, level: low, colour: green }
+    - { max: 9, level: medium, colour: yellow }
+    - { max: 14, level: high, colour: orange }
+    - { max: 25, level: critical, colour: red }
+  # Clause 6.1.2 a) risk acceptance criteria. Residual score above the
+  # threshold needs the named approval before the risk may be accepted.
+  acceptance:
+    - { max_residual: 6, approval: none }
+    - { max_residual: 12, approval: ISMS owner }
+    - { max_residual: 25, approval: top management }
+
+risks:
+  - id: R-001
+    title_en: Compromise of a developer account leads to unauthorised source code access
+    title_de: Kompromittierung eines Entwicklerkontos führt zu unbefugtem Zugriff auf den Quellcode
+    asset_groups: [AG-SRC, AG-IDENTITY]
+    threat_en: Credential phishing or reuse of a breached password against the GitHub organisation
+    threat_de: Phishing von Zugangsdaten oder Wiederverwendung eines geleakten Passworts gegen die GitHub-Organisation
+    vulnerability_en: Accounts without phishing resistant multi factor authentication
+    vulnerability_de: Konten ohne phishing-resistente Mehrfaktor-Authentisierung
+    owner: "@TODO-engineering-lead"
+    likelihood: 4
+    impact: 4
+    treatment: modify
+    controls: [A.5.15, A.5.16, A.5.17, A.5.18, A.8.2, A.8.4, A.8.5]
+    treatment_plan_en: Enforce organisation wide MFA, require SSO, review access rights quarterly, restrict outside collaborators.
+    treatment_plan_de: Organisationsweite MFA erzwingen, SSO verpflichtend, Zugangsrechte quartalsweise prüfen, externe Mitarbeitende einschränken.
+    residual_likelihood: 2
+    residual_impact: 4
+    status: in_treatment
+    due: 2026-12-31
+
+  - id: R-002
+    title_en: Secret committed to a repository is harvested and used against production
+    title_de: In ein Repository committetes Geheimnis wird abgegriffen und gegen die Produktion verwendet
+    asset_groups: [AG-CREDS, AG-SRC, AG-CUSTDATA]
+    threat_en: Automated scanning of public and leaked repositories for credentials
+    threat_de: Automatisiertes Durchsuchen öffentlicher und geleakter Repositories nach Zugangsdaten
+    vulnerability_en: Secrets pasted into code or configuration instead of the secret manager
+    vulnerability_de: Geheimnisse werden in Code oder Konfiguration eingefügt statt in den Secret Manager
+    owner: "@TODO-cto"
+    likelihood: 3
+    impact: 5
+    treatment: modify
+    controls: [A.8.4, A.8.8, A.8.24, A.8.28, A.5.17]
+    treatment_plan_en: Enable secret scanning with push protection on all repositories, pre-commit hooks, documented rotation procedure.
+    treatment_plan_de: Secret Scanning mit Push Protection in allen Repositories aktivieren, Pre-Commit-Hooks, dokumentiertes Rotationsverfahren.
+    residual_likelihood: 2
+    residual_impact: 4
+    status: in_treatment
+    due: 2026-10-31
+
+  - id: R-003
+    title_en: Vulnerable third party dependency is exploited in a delivered product
+    title_de: Verwundbare Drittanbieter-Abhängigkeit wird in einem ausgelieferten Produkt ausgenutzt
+    asset_groups: [AG-SRC, AG-CUSTDATA]
+    threat_en: Exploitation of a publicly known vulnerability in an open source component
+    threat_de: Ausnutzung einer öffentlich bekannten Schwachstelle in einer Open-Source-Komponente
+    vulnerability_en: No enforced patch deadline and no inventory of shipped components
+    vulnerability_de: Keine verbindliche Patch-Frist und kein Inventar ausgelieferter Komponenten
+    owner: "@TODO-engineering-lead"
+    likelihood: 4
+    impact: 4
+    treatment: modify
+    controls: [A.8.8, A.8.9, A.8.25, A.8.29, A.5.21]
+    treatment_plan_en: Dependabot on every repository, severity based remediation SLA, SBOM generated per release.
+    treatment_plan_de: Dependabot in jedem Repository, Behebungsfristen nach Schweregrad, SBOM je Release erzeugen.
+    residual_likelihood: 3
+    residual_impact: 3
+    status: in_treatment
+    due: 2026-11-30
+
+  - id: R-004
+    title_en: Loss or theft of an unencrypted endpoint exposes confidential information
+    title_de: Verlust oder Diebstahl eines unverschlüsselten Endgeräts legt vertrauliche Informationen offen
+    asset_groups: [AG-ENDPOINT, AG-CUSTDATA]
+    threat_en: Theft during travel or remote work
+    threat_de: Diebstahl auf Reisen oder im Homeoffice
+    vulnerability_en: Devices without enforced full disk encryption and screen lock
+    vulnerability_de: Geräte ohne erzwungene Festplattenverschlüsselung und Bildschirmsperre
+    owner: "@TODO-it-lead"
+    likelihood: 3
+    impact: 3
+    treatment: modify
+    controls: [A.8.1, A.8.24, A.7.7, A.7.9, A.6.7]
+    treatment_plan_en: MDM enforced disk encryption, automatic lock, remote wipe, device return on offboarding.
+    treatment_plan_de: MDM-erzwungene Festplattenverschlüsselung, automatische Sperre, Fernlöschung, Geräterückgabe beim Offboarding.
+    residual_likelihood: 3
+    residual_impact: 1
+    status: in_treatment
+    due: 2026-12-31
+
+  - id: R-005
+    title_en: Outage at a critical cloud provider makes the service unavailable to customers
+    title_de: Ausfall eines kritischen Cloud-Anbieters macht den Dienst für Kunden nicht verfügbar
+    asset_groups: [AG-SAAS, AG-CUSTDATA]
+    threat_en: Regional provider outage or account suspension
+    threat_de: Regionaler Anbieterausfall oder Kontosperrung
+    vulnerability_en: Single region deployment, recovery objectives never tested
+    vulnerability_de: Bereitstellung in nur einer Region, Wiederherstellungsziele nie getestet
+    owner: "@TODO-cto"
+    likelihood: 2
+    impact: 4
+    treatment: modify
+    controls: [A.5.29, A.5.30, A.8.13, A.8.14, A.5.23]
+    treatment_plan_en: Define RTO and RPO per service, restore test at least annually with a documented result, backups in a second location.
+    treatment_plan_de: RTO und RPO je Dienst festlegen, mindestens jährlicher Wiederherstellungstest mit dokumentiertem Ergebnis, Sicherungen an einem zweiten Ort.
+    residual_likelihood: 2
+    residual_impact: 3
+    status: open
+    due: 2027-03-31
+
+  - id: R-006
+    title_en: Subcontractor handles customer data below the contractually required level
+    title_de: Unterauftragnehmer verarbeitet Kundendaten unterhalb des vertraglich geforderten Niveaus
+    asset_groups: [AG-SAAS, AG-CUSTDATA]
+    threat_en: Supplier with weak security practices or an undisclosed sub processor
+    threat_de: Lieferant mit schwachen Sicherheitspraktiken oder nicht offengelegter Unterauftragsverarbeiter
+    vulnerability_en: No security requirements in supplier contracts and no periodic review
+    vulnerability_de: Keine Sicherheitsanforderungen in Lieferantenverträgen und keine regelmäßige Überprüfung
+    owner: "@TODO-managing-director"
+    likelihood: 3
+    impact: 4
+    treatment: modify
+    controls: [A.5.19, A.5.20, A.5.21, A.5.22, A.5.23, A.5.34]
+    treatment_plan_en: Supplier register with criticality rating, security annex and data processing agreement in contracts, annual review of critical suppliers.
+    treatment_plan_de: Lieferantenregister mit Kritikalitätsbewertung, Sicherheitsanhang und Auftragsverarbeitungsvertrag in Verträgen, jährliche Überprüfung kritischer Lieferanten.
+    residual_likelihood: 2
+    residual_impact: 3
+    status: open
+    due: 2027-03-31
+
+  - id: R-007
+    title_en: Key person leaves and undocumented knowledge blocks operation or recovery
+    title_de: Schlüsselperson verlässt das Unternehmen und undokumentiertes Wissen blockiert Betrieb oder Wiederherstellung
+    asset_groups: [AG-PEOPLE, AG-DOCS]
+    threat_en: Resignation, long term illness or accident
+    threat_de: Kündigung, Langzeiterkrankung oder Unfall
+    vulnerability_en: Single points of knowledge, operating procedures not written down
+    vulnerability_de: Einzelne Wissensträger, Betriebsabläufe nicht dokumentiert
+    owner: "@TODO-managing-director"
+    likelihood: 3
+    impact: 3
+    treatment: modify
+    controls: [A.5.2, A.5.3, A.5.37, A.6.5, A.8.14]
+    treatment_plan_en: Documented operating procedures for every critical system, named deputy per role, offboarding checklist.
+    treatment_plan_de: Dokumentierte Betriebsabläufe für jedes kritische System, benannte Vertretung je Rolle, Offboarding-Checkliste.
+    residual_likelihood: 2
+    residual_impact: 2
+    status: open
+    due: 2027-06-30
+
+  - id: R-008
+    title_en: Ransomware encrypts internal systems and backups
+    title_de: Ransomware verschlüsselt interne Systeme und Sicherungen
+    asset_groups: [AG-ENDPOINT, AG-SAAS, AG-CUSTDATA]
+    threat_en: Malware delivered by phishing or a compromised software update
+    threat_de: Schadsoftware über Phishing oder ein kompromittiertes Software-Update
+    vulnerability_en: Backups reachable with the same credentials as the systems they protect
+    vulnerability_de: Sicherungen mit denselben Zugangsdaten erreichbar wie die gesicherten Systeme
+    owner: "@TODO-it-lead"
+    likelihood: 3
+    impact: 5
+    treatment: modify
+    controls: [A.8.7, A.8.13, A.8.16, A.5.24, A.5.26, A.6.3, A.8.19]
+    treatment_plan_en: Immutable or offline backup copy, endpoint protection with central alerting, phishing training, tested incident response plan.
+    treatment_plan_de: Unveränderliche oder offline gehaltene Sicherungskopie, Endpunktschutz mit zentraler Alarmierung, Phishing-Schulung, getesteter Notfallplan.
+    residual_likelihood: 2
+    residual_impact: 3
+    status: in_treatment
+    due: 2026-12-31

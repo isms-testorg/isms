@@ -1,0 +1,401 @@
+# ISO/IEC 27001:2022 Annex A control catalogue — 93 controls in 4 themes.
+#
+# Reference data. Do not edit to record decisions: applicability, justification
+# and implementation status live in data/soa.yml and reference these ids.
+# The only reason to touch this file is a new edition of the standard.
+
+standard: "ISO/IEC 27001:2022"
+themes:
+  A.5:
+    en: Organizational controls
+    de: Organisatorische Maßnahmen
+  A.6:
+    en: People controls
+    de: Personenbezogene Maßnahmen
+  A.7:
+    en: Physical controls
+    de: Physische Maßnahmen
+  A.8:
+    en: Technological controls
+    de: Technologische Maßnahmen
+
+controls:
+  # --- A.5 Organizational controls (37) ---
+  - id: A.5.1
+    theme: A.5
+    title_en: Policies for information security
+    title_de: Informationssicherheitsrichtlinien
+  - id: A.5.2
+    theme: A.5
+    title_en: Information security roles and responsibilities
+    title_de: Informationssicherheitsrollen und -verantwortlichkeiten
+  - id: A.5.3
+    theme: A.5
+    title_en: Segregation of duties
+    title_de: Aufgabentrennung
+  - id: A.5.4
+    theme: A.5
+    title_en: Management responsibilities
+    title_de: Verantwortlichkeiten der Leitung
+  - id: A.5.5
+    theme: A.5
+    title_en: Contact with authorities
+    title_de: Kontakt mit Behörden
+  - id: A.5.6
+    theme: A.5
+    title_en: Contact with special interest groups
+    title_de: Kontakt mit speziellen Interessengruppen
+  - id: A.5.7
+    theme: A.5
+    title_en: Threat intelligence
+    title_de: Bedrohungsinformationen
+  - id: A.5.8
+    theme: A.5
+    title_en: Information security in project management
+    title_de: Informationssicherheit im Projektmanagement
+  - id: A.5.9
+    theme: A.5
+    title_en: Inventory of information and other associated assets
+    title_de: Inventar der Informationen und anderer damit verbundener Werte
+  - id: A.5.10
+    theme: A.5
+    title_en: Acceptable use of information and other associated assets
+    title_de: Zulässiger Gebrauch von Informationen und anderen damit verbundenen Werten
+  - id: A.5.11
+    theme: A.5
+    title_en: Return of assets
+    title_de: Rückgabe von Werten
+  - id: A.5.12
+    theme: A.5
+    title_en: Classification of information
+    title_de: Klassifizierung von Informationen
+  - id: A.5.13
+    theme: A.5
+    title_en: Labelling of information
+    title_de: Kennzeichnung von Informationen
+  - id: A.5.14
+    theme: A.5
+    title_en: Information transfer
+    title_de: Informationsübertragung
+  - id: A.5.15
+    theme: A.5
+    title_en: Access control
+    title_de: Zugangssteuerung
+  - id: A.5.16
+    theme: A.5
+    title_en: Identity management
+    title_de: Identitätsmanagement
+  - id: A.5.17
+    theme: A.5
+    title_en: Authentication information
+    title_de: Authentisierungsinformation
+  - id: A.5.18
+    theme: A.5
+    title_en: Access rights
+    title_de: Zugangsrechte
+  - id: A.5.19
+    theme: A.5
+    title_en: Information security in supplier relationships
+    title_de: Informationssicherheit in Lieferantenbeziehungen
+  - id: A.5.20
+    theme: A.5
+    title_en: Addressing information security within supplier agreements
+    title_de: Behandlung von Informationssicherheit in Lieferantenvereinbarungen
+  - id: A.5.21
+    theme: A.5
+    title_en: Managing information security in the ICT supply chain
+    title_de: Umgang mit Informationssicherheit in der Lieferkette für Informations- und Kommunikationstechnologie
+  - id: A.5.22
+    theme: A.5
+    title_en: Monitoring, review and change management of supplier services
+    title_de: Überwachung, Überprüfung und Änderungsmanagement von Lieferantendienstleistungen
+  - id: A.5.23
+    theme: A.5
+    title_en: Information security for use of cloud services
+    title_de: Informationssicherheit bei der Nutzung von Cloud-Diensten
+  - id: A.5.24
+    theme: A.5
+    title_en: Information security incident management planning and preparation
+    title_de: Planung und Vorbereitung der Handhabung von Informationssicherheitsvorfällen
+  - id: A.5.25
+    theme: A.5
+    title_en: Assessment and decision on information security events
+    title_de: Beurteilung und Entscheidung über Informationssicherheitsereignisse
+  - id: A.5.26
+    theme: A.5
+    title_en: Response to information security incidents
+    title_de: Reaktion auf Informationssicherheitsvorfälle
+  - id: A.5.27
+    theme: A.5
+    title_en: Learning from information security incidents
+    title_de: Erkenntnisse aus Informationssicherheitsvorfällen
+  - id: A.5.28
+    theme: A.5
+    title_en: Collection of evidence
+    title_de: Sammeln von Beweismaterial
+  - id: A.5.29
+    theme: A.5
+    title_en: Information security during disruption
+    title_de: Informationssicherheit während einer Störung
+  - id: A.5.30
+    theme: A.5
+    title_en: ICT readiness for business continuity
+    title_de: IKT-Bereitschaft für Business Continuity
+  - id: A.5.31
+    theme: A.5
+    title_en: Legal, statutory, regulatory and contractual requirements
+    title_de: Rechtliche, gesetzliche, regulatorische und vertragliche Anforderungen
+  - id: A.5.32
+    theme: A.5
+    title_en: Intellectual property rights
+    title_de: Geistige Eigentumsrechte
+  - id: A.5.33
+    theme: A.5
+    title_en: Protection of records
+    title_de: Schutz von Aufzeichnungen
+  - id: A.5.34
+    theme: A.5
+    title_en: Privacy and protection of PII
+    title_de: Privatsphäre und Schutz von personenbezogener Information
+  - id: A.5.35
+    theme: A.5
+    title_en: Independent review of information security
+    title_de: Unabhängige Überprüfung der Informationssicherheit
+  - id: A.5.36
+    theme: A.5
+    title_en: Compliance with policies, rules and standards for information security
+    title_de: Einhaltung von Richtlinien, Regeln und Normen für Informationssicherheit
+  - id: A.5.37
+    theme: A.5
+    title_en: Documented operating procedures
+    title_de: Dokumentierte Betriebsabläufe
+
+  # --- A.6 People controls (8) ---
+  - id: A.6.1
+    theme: A.6
+    title_en: Screening
+    title_de: Sicherheitsüberprüfung
+  - id: A.6.2
+    theme: A.6
+    title_en: Terms and conditions of employment
+    title_de: Beschäftigungs- und Vertragsbedingungen
+  - id: A.6.3
+    theme: A.6
+    title_en: Information security awareness, education and training
+    title_de: Informationssicherheitsbewusstsein, -ausbildung und -schulung
+  - id: A.6.4
+    theme: A.6
+    title_en: Disciplinary process
+    title_de: Disziplinarverfahren
+  - id: A.6.5
+    theme: A.6
+    title_en: Responsibilities after termination or change of employment
+    title_de: Verantwortlichkeiten bei Beendigung oder Änderung der Beschäftigung
+  - id: A.6.6
+    theme: A.6
+    title_en: Confidentiality or non-disclosure agreements
+    title_de: Vertraulichkeits- oder Geheimhaltungsvereinbarungen
+  - id: A.6.7
+    theme: A.6
+    title_en: Remote working
+    title_de: Arbeiten aus der Ferne
+  - id: A.6.8
+    theme: A.6
+    title_en: Information security event reporting
+    title_de: Meldung von Informationssicherheitsereignissen
+
+  # --- A.7 Physical controls (14) ---
+  - id: A.7.1
+    theme: A.7
+    title_en: Physical security perimeters
+    title_de: Physische Sicherheitsperimeter
+  - id: A.7.2
+    theme: A.7
+    title_en: Physical entry
+    title_de: Physischer Zutritt
+  - id: A.7.3
+    theme: A.7
+    title_en: Securing offices, rooms and facilities
+    title_de: Sichern von Büros, Räumen und Einrichtungen
+  - id: A.7.4
+    theme: A.7
+    title_en: Physical security monitoring
+    title_de: Überwachung der physischen Sicherheit
+  - id: A.7.5
+    theme: A.7
+    title_en: Protecting against physical and environmental threats
+    title_de: Schutz vor physischen und umweltbedingten Bedrohungen
+  - id: A.7.6
+    theme: A.7
+    title_en: Working in secure areas
+    title_de: Arbeiten in Sicherheitsbereichen
+  - id: A.7.7
+    theme: A.7
+    title_en: Clear desk and clear screen
+    title_de: Aufgeräumte Arbeitsumgebung und Bildschirmsperren
+  - id: A.7.8
+    theme: A.7
+    title_en: Equipment siting and protection
+    title_de: Platzierung und Schutz von Geräten und Betriebsmitteln
+  - id: A.7.9
+    theme: A.7
+    title_en: Security of assets off-premises
+    title_de: Sicherheit von Werten außerhalb der Räumlichkeiten
+  - id: A.7.10
+    theme: A.7
+    title_en: Storage media
+    title_de: Speichermedien
+  - id: A.7.11
+    theme: A.7
+    title_en: Supporting utilities
+    title_de: Versorgungseinrichtungen
+  - id: A.7.12
+    theme: A.7
+    title_en: Cabling security
+    title_de: Sicherheit der Verkabelung
+  - id: A.7.13
+    theme: A.7
+    title_en: Equipment maintenance
+    title_de: Instandhaltung von Geräten und Betriebsmitteln
+  - id: A.7.14
+    theme: A.7
+    title_en: Secure disposal or re-use of equipment
+    title_de: Sichere Entsorgung oder Wiederverwendung von Geräten und Betriebsmitteln
+
+  # --- A.8 Technological controls (34) ---
+  - id: A.8.1
+    theme: A.8
+    title_en: User endpoint devices
+    title_de: Endpunktgeräte von Benutzern
+  - id: A.8.2
+    theme: A.8
+    title_en: Privileged access rights
+    title_de: Privilegierte Zugangsrechte
+  - id: A.8.3
+    theme: A.8
+    title_en: Information access restriction
+    title_de: Informationszugangsbeschränkung
+  - id: A.8.4
+    theme: A.8
+    title_en: Access to source code
+    title_de: Zugang zum Quellcode
+  - id: A.8.5
+    theme: A.8
+    title_en: Secure authentication
+    title_de: Sichere Authentisierung
+  - id: A.8.6
+    theme: A.8
+    title_en: Capacity management
+    title_de: Kapazitätssteuerung
+  - id: A.8.7
+    theme: A.8
+    title_en: Protection against malware
+    title_de: Schutz gegen Schadsoftware
+  - id: A.8.8
+    theme: A.8
+    title_en: Management of technical vulnerabilities
+    title_de: Handhabung von technischen Schwachstellen
+  - id: A.8.9
+    theme: A.8
+    title_en: Configuration management
+    title_de: Konfigurationsmanagement
+  - id: A.8.10
+    theme: A.8
+    title_en: Information deletion
+    title_de: Löschung von Informationen
+  - id: A.8.11
+    theme: A.8
+    title_en: Data masking
+    title_de: Datenmaskierung
+  - id: A.8.12
+    theme: A.8
+    title_en: Data leakage prevention
+    title_de: Verhinderung von Datenlecks
+  - id: A.8.13
+    theme: A.8
+    title_en: Information backup
+    title_de: Sicherung von Informationen
+  - id: A.8.14
+    theme: A.8
+    title_en: Redundancy of information processing facilities
+    title_de: Redundanz von informationsverarbeitenden Einrichtungen
+  - id: A.8.15
+    theme: A.8
+    title_en: Logging
+    title_de: Protokollierung
+  - id: A.8.16
+    theme: A.8
+    title_en: Monitoring activities
+    title_de: Überwachungsaktivitäten
+  - id: A.8.17
+    theme: A.8
+    title_en: Clock synchronization
+    title_de: Uhrensynchronisation
+  - id: A.8.18
+    theme: A.8
+    title_en: Use of privileged utility programs
+    title_de: Gebrauch von Hilfsprogrammen mit privilegierten Rechten
+  - id: A.8.19
+    theme: A.8
+    title_en: Installation of software on operational systems
+    title_de: Installation von Software auf Systemen im Betrieb
+  - id: A.8.20
+    theme: A.8
+    title_en: Networks security
+    title_de: Netzwerksicherheit
+  - id: A.8.21
+    theme: A.8
+    title_en: Security of network services
+    title_de: Sicherheit von Netzwerkdiensten
+  - id: A.8.22
+    theme: A.8
+    title_en: Segregation of networks
+    title_de: Trennung von Netzwerken
+  - id: A.8.23
+    theme: A.8
+    title_en: Web filtering
+    title_de: Webfilterung
+  - id: A.8.24
+    theme: A.8
+    title_en: Use of cryptography
+    title_de: Gebrauch von Kryptographie
+  - id: A.8.25
+    theme: A.8
+    title_en: Secure development life cycle
+    title_de: Sicherer Entwicklungslebenszyklus
+  - id: A.8.26
+    theme: A.8
+    title_en: Application security requirements
+    title_de: Anforderungen an die Anwendungssicherheit
+  - id: A.8.27
+    theme: A.8
+    title_en: Secure system architecture and engineering principles
+    title_de: Sichere Systemarchitektur und Prinzipien für die Systemtechnik
+  - id: A.8.28
+    theme: A.8
+    title_en: Secure coding
+    title_de: Sicheres Codieren
+  - id: A.8.29
+    theme: A.8
+    title_en: Security testing in development and acceptance
+    title_de: Sicherheitsprüfung in Entwicklung und Abnahme
+  - id: A.8.30
+    theme: A.8
+    title_en: Outsourced development
+    title_de: Ausgegliederte Entwicklung
+  - id: A.8.31
+    theme: A.8
+    title_en: Separation of development, test and production environments
+    title_de: Trennung von Entwicklungs-, Test- und Produktionsumgebungen
+  - id: A.8.32
+    theme: A.8
+    title_en: Change management
+    title_de: Änderungssteuerung
+  - id: A.8.33
+    theme: A.8
+    title_en: Test information
+    title_de: Testinformationen
+  - id: A.8.34
+    theme: A.8
+    title_en: Protection of information systems during audit testing
+    title_de: Schutz von Informationssystemen während Prüfungstests

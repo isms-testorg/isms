@@ -1,0 +1,55 @@
+---
+id: pol-asset-management
+title: Asset Management and Information Classification Policy
+lang: en
+version: 0.1.0
+status: draft
+owner: "@TODO-owner"
+approver: "@TODO-approver"
+approved_on:
+next_review:
+review_cycle_months: 12
+classification: internal
+controls: [A.5.9, A.5.12, A.5.13, A.7.10, A.7.14, A.8.10]
+---
+
+# Asset Management and Information Classification Policy
+
+This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+
+## 1. Purpose
+
+TODO
+
+## 2. Scope
+
+TODO
+
+## 3. Roles and responsibilities
+
+TODO
+
+## 4. Requirements
+
+TODO
+
+## 5. Exceptions
+
+TODO
+
+## 6. Monitoring and compliance
+
+TODO
+
+## 7. References
+
+TODO
+
+## 8. Related Annex A controls
+
+- **A.5.9** Inventory of information and other associated assets
+- **A.5.12** Classification of information
+- **A.5.13** Labelling of information
+- **A.7.10** Storage media
+- **A.7.14** Secure disposal or re-use of equipment
+- **A.8.10** Information deletion

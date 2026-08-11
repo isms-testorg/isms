@@ -1,0 +1,852 @@
+# Statement of Applicability (clause 6.1.3 d).
+#
+# One entry per Annex A control. `applicable: null` means nobody has decided
+# yet and the check will keep reminding you.
+#
+# Excluding a control requires justification_en AND justification_de.
+#
+# Deliberately NOT stored here, because it is derived and would drift:
+#   implementing documents -> the `controls:` frontmatter of each document
+#   related risks          -> the `controls:` list in data/risks.yml
+#   related evidence       -> the `controls:` list in data/evidence-index.yml
+# The rendered Statement of Applicability pulls all three in automatically.
+#
+# status: not_assessed | planned | partially_implemented | implemented | not_applicable
+
+controls:
+  - id: A.5.1
+    # Policies for information security
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.2
+    # Information security roles and responsibilities
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.3
+    # Segregation of duties
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.4
+    # Management responsibilities
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.5
+    # Contact with authorities
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.6
+    # Contact with special interest groups
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.7
+    # Threat intelligence
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.8
+    # Information security in project management
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.9
+    # Inventory of information and other associated assets
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.10
+    # Acceptable use of information and other associated assets
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.11
+    # Return of assets
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.12
+    # Classification of information
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.13
+    # Labelling of information
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.14
+    # Information transfer
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.15
+    # Access control
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.16
+    # Identity management
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.17
+    # Authentication information
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.18
+    # Access rights
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.19
+    # Information security in supplier relationships
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.20
+    # Addressing information security within supplier agreements
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.21
+    # Managing information security in the ICT supply chain
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.22
+    # Monitoring, review and change management of supplier services
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.23
+    # Information security for use of cloud services
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.24
+    # Information security incident management planning and preparation
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.25
+    # Assessment and decision on information security events
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.26
+    # Response to information security incidents
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.27
+    # Learning from information security incidents
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.28
+    # Collection of evidence
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.29
+    # Information security during disruption
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.30
+    # ICT readiness for business continuity
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.31
+    # Legal, statutory, regulatory and contractual requirements
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.32
+    # Intellectual property rights
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.33
+    # Protection of records
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.34
+    # Privacy and protection of PII
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.35
+    # Independent review of information security
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.36
+    # Compliance with policies, rules and standards for information security
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.5.37
+    # Documented operating procedures
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.6.1
+    # Screening
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.6.2
+    # Terms and conditions of employment
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.6.3
+    # Information security awareness, education and training
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.6.4
+    # Disciplinary process
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.6.5
+    # Responsibilities after termination or change of employment
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.6.6
+    # Confidentiality or non-disclosure agreements
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.6.7
+    # Remote working
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.6.8
+    # Information security event reporting
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.1
+    # Physical security perimeters
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.2
+    # Physical entry
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.3
+    # Securing offices, rooms and facilities
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.4
+    # Physical security monitoring
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.5
+    # Protecting against physical and environmental threats
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.6
+    # Working in secure areas
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.7
+    # Clear desk and clear screen
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.8
+    # Equipment siting and protection
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.9
+    # Security of assets off-premises
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.10
+    # Storage media
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.11
+    # Supporting utilities
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.12
+    # Cabling security
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.13
+    # Equipment maintenance
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.7.14
+    # Secure disposal or re-use of equipment
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.1
+    # User endpoint devices
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.2
+    # Privileged access rights
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.3
+    # Information access restriction
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.4
+    # Access to source code
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.5
+    # Secure authentication
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.6
+    # Capacity management
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.7
+    # Protection against malware
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.8
+    # Management of technical vulnerabilities
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.9
+    # Configuration management
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.10
+    # Information deletion
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.11
+    # Data masking
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.12
+    # Data leakage prevention
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.13
+    # Information backup
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.14
+    # Redundancy of information processing facilities
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.15
+    # Logging
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.16
+    # Monitoring activities
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.17
+    # Clock synchronization
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.18
+    # Use of privileged utility programs
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.19
+    # Installation of software on operational systems
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.20
+    # Networks security
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.21
+    # Security of network services
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.22
+    # Segregation of networks
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.23
+    # Web filtering
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.24
+    # Use of cryptography
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.25
+    # Secure development life cycle
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.26
+    # Application security requirements
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.27
+    # Secure system architecture and engineering principles
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.28
+    # Secure coding
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.29
+    # Security testing in development and acceptance
+    applicable: true
+    status: planned
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.30
+    # Outsourced development
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.31
+    # Separation of development, test and production environments
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.32
+    # Change management
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.33
+    # Test information
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
+
+  - id: A.8.34
+    # Protection of information systems during audit testing
+    applicable: null
+    status: not_assessed
+    implementation_note_en:
+    implementation_note_de:
+    justification_en:
+    justification_de:
