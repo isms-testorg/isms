@@ -15,7 +15,7 @@ controls: [A.5.19, A.5.20, A.5.21, A.5.22, A.5.23]
 
 # Supplier and Cloud Security Policy
 
-This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+This document is part of the information security management system of dev-test. It is maintained under version control; the signed git history and the release packs are its change record.
 
 ## 1. Purpose
 

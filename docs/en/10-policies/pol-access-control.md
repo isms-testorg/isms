@@ -15,7 +15,7 @@ controls: [A.5.15, A.5.16, A.5.17, A.5.18, A.8.2, A.8.3, A.8.5, A.8.18]
 
 # Access Control Policy
 
-This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+This document is part of the information security management system of dev-test. It is maintained under version control; the signed git history and the release packs are its change record.
 
 ## 1. Purpose
 

@@ -15,7 +15,7 @@ controls: [A.5.2, A.5.3, A.5.4]
 
 # Information Security Roles and Responsibilities
 
-This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+This document is part of the information security management system of dev-test. It is maintained under version control; the signed git history and the release packs are its change record.
 
 ## 1. Purpose
 

@@ -15,7 +15,7 @@ controls: [A.5.29, A.5.30, A.8.14]
 
 # Business Continuity and ICT Readiness Policy
 
-This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+This document is part of the information security management system of dev-test. It is maintained under version control; the signed git history and the release packs are its change record.
 
 ## 1. Purpose
 

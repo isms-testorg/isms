@@ -15,7 +15,7 @@ controls: [A.8.4, A.8.25, A.8.26, A.8.27, A.8.28, A.8.29, A.8.30, A.8.31, A.8.33
 
 # Secure Development Policy
 
-This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+This document is part of the information security management system of dev-test. It is maintained under version control; the signed git history and the release packs are its change record.
 
 ## 1. Purpose
 

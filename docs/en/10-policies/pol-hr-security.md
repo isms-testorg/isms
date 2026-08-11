@@ -15,7 +15,7 @@ controls: [A.6.1, A.6.2, A.6.3, A.6.4, A.6.5, A.6.6]
 
 # Human Resource Security Policy
 
-This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+This document is part of the information security management system of dev-test. It is maintained under version control; the signed git history and the release packs are its change record.
 
 ## 1. Purpose
 

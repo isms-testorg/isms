@@ -15,7 +15,7 @@ controls: [A.5.9, A.5.12, A.5.13, A.7.10, A.7.14, A.8.10]
 
 # Asset Management and Information Classification Policy
 
-This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+This document is part of the information security management system of dev-test. It is maintained under version control; the signed git history and the release packs are its change record.
 
 ## 1. Purpose
 

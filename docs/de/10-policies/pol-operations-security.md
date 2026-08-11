@@ -15,7 +15,7 @@ controls: [A.5.37, A.8.6, A.8.7, A.8.8, A.8.9, A.8.13, A.8.15, A.8.16, A.8.17, A
 
 # Richtlinie für Betriebssicherheit
 
-Dieses Dokument ist Teil des Informationssicherheits-Managementsystems von Sprengnetter Austria GmbH. Es wird unter Versionskontrolle gepflegt; die signierte git-Historie und die Release-Pakete sind sein Änderungsnachweis.
+Dieses Dokument ist Teil des Informationssicherheits-Managementsystems von dev-test. Es wird unter Versionskontrolle gepflegt; die signierte git-Historie und die Release-Pakete sind sein Änderungsnachweis.
 
 ## 1. Zweck
 

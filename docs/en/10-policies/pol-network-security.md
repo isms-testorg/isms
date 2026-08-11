@@ -15,7 +15,7 @@ controls: [A.5.14, A.8.11, A.8.12, A.8.20, A.8.21, A.8.22, A.8.23]
 
 # Network and Information Transfer Security Policy
 
-This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+This document is part of the information security management system of dev-test. It is maintained under version control; the signed git history and the release packs are its change record.
 
 ## 1. Purpose
 

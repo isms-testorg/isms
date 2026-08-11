@@ -15,7 +15,7 @@ controls: [A.5.10, A.5.11, A.6.7, A.7.7, A.8.1]
 
 # Richtlinie zur zulässigen Nutzung
 
-Dieses Dokument ist Teil des Informationssicherheits-Managementsystems von Sprengnetter Austria GmbH. Es wird unter Versionskontrolle gepflegt; die signierte git-Historie und die Release-Pakete sind sein Änderungsnachweis.
+Dieses Dokument ist Teil des Informationssicherheits-Managementsystems von dev-test. Es wird unter Versionskontrolle gepflegt; die signierte git-Historie und die Release-Pakete sind sein Änderungsnachweis.
 
 ## 1. Zweck
 

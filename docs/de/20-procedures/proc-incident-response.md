@@ -15,7 +15,7 @@ controls: [A.5.25, A.5.26, A.5.27, A.5.28]
 
 # Verfahren für die Reaktion auf Vorfälle
 
-Dieses Dokument ist Teil des Informationssicherheits-Managementsystems von Sprengnetter Austria GmbH. Es wird unter Versionskontrolle gepflegt; die signierte git-Historie und die Release-Pakete sind sein Änderungsnachweis.
+Dieses Dokument ist Teil des Informationssicherheits-Managementsystems von dev-test. Es wird unter Versionskontrolle gepflegt; die signierte git-Historie und die Release-Pakete sind sein Änderungsnachweis.
 
 ## 1. Zweck
 

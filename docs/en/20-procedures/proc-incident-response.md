@@ -15,7 +15,7 @@ controls: [A.5.25, A.5.26, A.5.27, A.5.28]
 
 # Incident Response Procedure
 
-This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+This document is part of the information security management system of dev-test. It is maintained under version control; the signed git history and the release packs are its change record.
 
 ## 1. Purpose
 

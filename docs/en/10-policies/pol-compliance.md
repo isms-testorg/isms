@@ -15,7 +15,7 @@ controls: [A.5.7, A.5.8, A.5.31, A.5.32, A.5.33, A.5.34, A.5.35, A.5.36]
 
 # Legal, Regulatory and Compliance Policy
 
-This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+This document is part of the information security management system of dev-test. It is maintained under version control; the signed git history and the release packs are its change record.
 
 ## 1. Purpose
 

@@ -108,10 +108,10 @@ SECTIONS = {
 
 INTRO = {
     "en": ("This document is part of the information security management system of "
-           "Sprengnetter Austria GmbH. It is maintained under version control; the "
+           "dev-test. It is maintained under version control; the "
            "signed git history and the release packs are its change record."),
     "de": ("Dieses Dokument ist Teil des Informationssicherheits-Managementsystems von "
-           "Sprengnetter Austria GmbH. Es wird unter Versionskontrolle gepflegt; die "
+           "dev-test. Es wird unter Versionskontrolle gepflegt; die "
            "signierte git-Historie und die Release-Pakete sind sein Änderungsnachweis."),
 }
 

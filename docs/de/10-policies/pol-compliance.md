@@ -15,7 +15,7 @@ controls: [A.5.7, A.5.8, A.5.31, A.5.32, A.5.33, A.5.34, A.5.35, A.5.36]
 
 # Richtlinie für rechtliche und regulatorische Konformität
 
-Dieses Dokument ist Teil des Informationssicherheits-Managementsystems von Sprengnetter Austria GmbH. Es wird unter Versionskontrolle gepflegt; die signierte git-Historie und die Release-Pakete sind sein Änderungsnachweis.
+Dieses Dokument ist Teil des Informationssicherheits-Managementsystems von dev-test. Es wird unter Versionskontrolle gepflegt; die signierte git-Historie und die Release-Pakete sind sein Änderungsnachweis.
 
 ## 1. Zweck
 

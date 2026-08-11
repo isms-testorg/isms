@@ -23,7 +23,7 @@ import zipfile
 
 from isms import DOCS, LANGS, ROOT, split_frontmatter
 
-ORG = "Sprengnetter Austria GmbH"
+ORG = "dev-test"
 
 PACK_TITLE = {
     "en": "Information Security Management System",

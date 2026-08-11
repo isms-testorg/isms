@@ -15,7 +15,7 @@ controls: [A.5.14, A.8.11, A.8.12, A.8.20, A.8.21, A.8.22, A.8.23]
 
 # Richtlinie für Netzwerk- und Übertragungssicherheit
 
-Dieses Dokument ist Teil des Informationssicherheits-Managementsystems von Sprengnetter Austria GmbH. Es wird unter Versionskontrolle gepflegt; die signierte git-Historie und die Release-Pakete sind sein Änderungsnachweis.
+Dieses Dokument ist Teil des Informationssicherheits-Managementsystems von dev-test. Es wird unter Versionskontrolle gepflegt; die signierte git-Historie und die Release-Pakete sind sein Änderungsnachweis.
 
 ## 1. Zweck
 

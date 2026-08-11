@@ -1,4 +1,4 @@
-# ISMS — Sprengnetter Austria GmbH
+# ISMS — dev-test
 
 Information Security Management System per **ISO/IEC 27001:2022**, kept as code
 and versioned in git. Bilingual (German and English). The repository is the

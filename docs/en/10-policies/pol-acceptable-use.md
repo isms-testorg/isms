@@ -15,7 +15,7 @@ controls: [A.5.10, A.5.11, A.6.7, A.7.7, A.8.1]
 
 # Acceptable Use Policy
 
-This document is part of the information security management system of Sprengnetter Austria GmbH. It is maintained under version control; the signed git history and the release packs are its change record.
+This document is part of the information security management system of dev-test. It is maintained under version control; the signed git history and the release packs are its change record.
 
 ## 1. Purpose
 
