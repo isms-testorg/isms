@@ -43,7 +43,7 @@ local function wrap_columns(tbl)
           local next_position = utf8.offset(word.text, 2, position)
           if next_position then
             table.insert(parts, pandoc.Str(word.text:sub(start, next_position - 1)))
-            table.insert(parts, pandoc.RawInline("latex", "\\allowbreak"))
+            table.insert(parts, pandoc.RawInline("latex", "\\allowbreak{}"))
             start, length = next_position, 0
           end
         end
