@@ -27,14 +27,6 @@ from isms import DOCS, LANGS, ROOT, split_frontmatter
 ORG = "dev-test"
 PDF_THEME = os.path.join(ROOT, "tools", "pdf-theme.tex")
 LANDSCAPE_TABLES = os.path.join(ROOT, "tools", "landscape-tables.lua")
-PDF_LOGO = [
-    "```{=latex}",
-    r"\begin{center}",
-    r"\includegraphics[width=.42\textwidth]{assets/company-logo.png}",
-    r"\end{center}",
-    "```",
-    "",
-]
 
 PACK_TITLE = {
     "en": "Information Security Management System",
@@ -63,6 +55,11 @@ SECTION_TITLES = {
 LEADING_H1 = re.compile(r"\A\s*#\s+.*?\n")
 ATX_HEADING = re.compile(r"^(#{1,5})(\s+\S)")
 FENCE = re.compile(r"^\s*(```|~~~)")
+LATEX_ESCAPES = {
+    "&": r"\&", "%": r"\%", "$": r"\$", "#": r"\#", "_": r"\_",
+    "{": r"\{", "}": r"\}", "~": r"\textasciitilde{}",
+    "^": r"\textasciicircum{}", "\\": r"\textbackslash{}",
+}
 
 
 def demote_headings(body: str) -> str:
@@ -80,6 +77,17 @@ def demote_headings(body: str) -> str:
             line = ATX_HEADING.sub(r"#\1\2", line)
         out.append(line)
     return "\n".join(out)
+
+
+def pdf_header(pack: str, stamp: str, version: str) -> str:
+    """Write the static theme plus release-specific footer values beside a pack."""
+    escape = lambda value: "".join(LATEX_ESCAPES.get(char, char) for char in value)
+    path = os.path.join(os.path.dirname(pack), "pdf-header.tex")
+    with open(PDF_THEME, encoding="utf-8") as source, open(path, "w", encoding="utf-8") as out:
+        out.write(source.read())
+        out.write(f"\n\\renewcommand{{\\pdfpackdate}}{{{escape(stamp)}}}\n")
+        out.write(f"\\renewcommand{{\\pdfpackversion}}{{{escape(version)}}}\n")
+    return path
 
 
 def doc_header_table(meta: dict, lang: str, state: dict | None) -> list[str]:
@@ -134,7 +142,7 @@ def build_pack(lang: str, build: str, version: str, states: dict) -> str:
         "papersize: a4",
         "---",
         "",
-    ] + PDF_LOGO
+    ]
 
     current_section = None
     for section, path in sources:
@@ -164,17 +172,14 @@ def build_pack(lang: str, build: str, version: str, states: dict) -> str:
     return pack
 
 
-def pandoc_command(pack: str, fmt: str) -> tuple[str, list[str]]:
+def pandoc_command(pack: str, fmt: str, header: str = PDF_THEME) -> tuple[str, list[str]]:
     out = os.path.splitext(pack)[0] + ("." + fmt)
     cmd = ["pandoc", pack, "-o", out, "--from", "markdown", "--standalone"]
     if fmt == "pdf":
         cmd += [
             "--pdf-engine", "xelatex",
-            "--include-in-header", PDF_THEME,
+            "--include-in-header", header,
             "--lua-filter", LANDSCAPE_TABLES,
-            "--variable", "mainfont=TeX Gyre Pagella",
-            "--variable", "sansfont=TeX Gyre Heros",
-            "--variable", "monofont=Latin Modern Mono",
             "--variable", "fontsize=10.5pt",
             "--variable", "linestretch=1.12",
             "--variable", "colorlinks=true",
@@ -184,8 +189,9 @@ def pandoc_command(pack: str, fmt: str) -> tuple[str, list[str]]:
     return out, cmd
 
 
-def pandoc(pack: str, fmt: str) -> str:
-    out, cmd = pandoc_command(pack, fmt)
+def pandoc(pack: str, fmt: str, stamp: str, version: str) -> str:
+    header = pdf_header(pack, stamp, version) if fmt == "pdf" else PDF_THEME
+    out, cmd = pandoc_command(pack, fmt, header)
     subprocess.run(cmd, check=True, cwd=ROOT)
     print(f"wrote {os.path.relpath(out, ROOT)}")
     return out
@@ -273,7 +279,7 @@ def main() -> int:
         pack = build_pack(lang, build, args.version, states)
         for fmt in formats:
             if fmt != "md":
-                pandoc(pack, fmt)
+                pandoc(pack, fmt, dt.date.today().isoformat(), args.version)
 
     if args.pack:
         make_pack_zip(args.out, args.version)

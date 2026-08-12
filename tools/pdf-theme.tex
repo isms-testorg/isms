@@ -5,19 +5,59 @@
 \usepackage{colortbl}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
+\usepackage{needspace}
+\usepackage{etoolbox}
 \definecolor{BrandBlue}{HTML}{008CFF}
 \definecolor{BrandInk}{HTML}{303238}
 \definecolor{BrandRule}{HTML}{D9E8F5}
+\setmainfont[
+  Path=assets/fonts/,
+  Extension=.otf,
+  UprightFont=SourceSans3-Regular,
+  BoldFont=SourceSans3-Semibold,
+  ItalicFont=SourceSans3-It,
+  BoldItalicFont=SourceSans3-SemiboldIt
+]{SourceSans3-Regular}
+\setsansfont[
+  Path=assets/fonts/,
+  Extension=.otf,
+  UprightFont=SourceSans3-Regular,
+  BoldFont=SourceSans3-Semibold,
+  ItalicFont=SourceSans3-It,
+  BoldItalicFont=SourceSans3-SemiboldIt
+]{SourceSans3-Regular}
+\setmonofont{Latin Modern Mono}
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
 \arrayrulecolor{BrandRule}
+\AtBeginEnvironment{longtable}{\renewcommand{\arraystretch}{1.25}\setlength{\tabcolsep}{6pt}}
+\raggedbottom
+\widowpenalty=10000
+\clubpenalty=10000
+\pretocmd{\section}{\clearpage}{}{}
+\pretocmd{\subsection}{\Needspace{10\baselineskip}}{}{}
+\pretocmd{\subsubsection}{\Needspace{5\baselineskip}}{}{}
 \titleformat{\section}{\Large\bfseries\color{BrandBlue}}{\thesection}{.7em}{}
 \titleformat{\subsection}{\large\bfseries\color{BrandInk}}{\thesubsection}{.7em}{}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{BrandBlue}\textbf{ISMS}}
+\setlength{\headheight}{14mm}
+\fancyhead[L]{\includegraphics[height=10mm]{assets/company-logo.png}}
 \fancyhead[R]{\small\color{BrandInk}\nouppercase{\leftmark}}
-\fancyfoot[C]{\small\color{BrandInk}\thepage}
+\providecommand{\pdfpackdate}{}
+\providecommand{\pdfpackversion}{}
+\fancyfoot[L]{\small\color{BrandInk}Created \pdfpackdate}
+\fancyfoot[C]{\small\color{BrandInk}Version \pdfpackversion}
+\fancyfoot[R]{\small\color{BrandInk}\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\headrule}{\hbox to\headwidth{\color{BrandRule}\leaders\hrule height \headrulewidth\hfill}}
-\fancypagestyle{plain}{\pagestyle{fancy}}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[L]{\includegraphics[height=10mm]{assets/company-logo.png}}
+  \fancyhead[R]{\small\color{BrandInk}\nouppercase{\leftmark}}
+  \fancyfoot[L]{\small\color{BrandInk}Created \pdfpackdate}
+  \fancyfoot[C]{\small\color{BrandInk}Version \pdfpackversion}
+  \fancyfoot[R]{\small\color{BrandInk}\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\headrule}{\hbox to\headwidth{\color{BrandRule}\leaders\hrule height \headrulewidth\hfill}}
+}
