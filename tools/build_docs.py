@@ -27,6 +27,14 @@ from isms import DOCS, LANGS, ROOT, split_frontmatter
 ORG = "dev-test"
 PDF_THEME = os.path.join(ROOT, "tools", "pdf-theme.tex")
 LANDSCAPE_TABLES = os.path.join(ROOT, "tools", "landscape-tables.lua")
+PDF_LOGO = [
+    "```{=latex}",
+    r"\begin{center}",
+    r"\includegraphics[width=.42\textwidth]{assets/company-logo.png}",
+    r"\end{center}",
+    "```",
+    "",
+]
 
 PACK_TITLE = {
     "en": "Information Security Management System",
@@ -126,7 +134,7 @@ def build_pack(lang: str, build: str, version: str, states: dict) -> str:
         "papersize: a4",
         "---",
         "",
-    ]
+    ] + PDF_LOGO
 
     current_section = None
     for section, path in sources:
