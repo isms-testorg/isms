@@ -62,6 +62,7 @@ CODE_FILE_REFERENCE = re.compile(r"`((?:assets|data|docs|evidence|tools)/[^`\s]+
 FILE_REFERENCE = re.compile(
     r"(?<![\w`])((?:assets|data|docs|evidence|tools)/[\w./*-]+\.[\w-]+)(?![\w/])"
 )
+EVIDENCE_PATH_REFERENCE = re.compile(r"(?<![\w/])((?:github|manual)/[^\s|`]+)")
 DIRECTORY_REFERENCE = re.compile(r"(?<![\w`])((?:assets|data|docs|evidence|tools)/)(?![\w/])")
 LATEX_ESCAPES = {
     "&": r"\&", "%": r"\%", "$": r"\$", "#": r"\#", "_": r"\_",
@@ -149,6 +150,8 @@ def annotate_references(body: str, references: dict[str, str], repo: str | None,
         lambda match: f"`{match.group(1)}` [{label(match.group(1))}]", body)
     body = FILE_REFERENCE.sub(
         lambda match: f"{match.group(1)} [{label(match.group(1))}]", body)
+    body = EVIDENCE_PATH_REFERENCE.sub(
+        lambda match: f"{match.group(1)} [{label('evidence/' + match.group(1))}]", body)
     return DIRECTORY_REFERENCE.sub(
         lambda match: f"{match.group(1)} [{label(match.group(1))}]", body)
 

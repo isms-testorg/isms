@@ -347,11 +347,11 @@ def render_evidence(m: Model, lang: str, commit: str) -> str:
         matches = evidence_files(item.get("path", ""))
         newest = max((os.path.basename(os.path.dirname(p)) for p in matches), default="")
         rows.append([item["id"], item.get(f"title_{lang}"),
-                     f"{item.get('path')} ({len(matches)})", newest or t["not_recorded"],
+                     item.get("path", "").removeprefix("evidence/"), newest or t["not_recorded"],
                      f"{item.get('valid_months', '')} {t['months']}",
                      item.get("collector") or t["manual"],
                      ", ".join(item.get("controls") or [])])
-    out += table(["ID", t["title"], f"{t['path']} / {t['files']}", t["newest"], t["valid"],
+    out += table(["ID", t["title"], f"{t['path']} (evidence root)", t["newest"], t["valid"],
                   t["collector"], t["control"]], rows)
     return "\n".join(out)
 

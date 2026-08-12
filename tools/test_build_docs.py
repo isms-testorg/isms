@@ -42,6 +42,11 @@ def main() -> None:
     assert "[REF-001]" in annotated and "[REF-002]" in annotated and "[REF-003]" in annotated
     assert references == {"https://example.test": "REF-001", "tools/check_isms.py": "REF-002",
                           "evidence/manual/example.md": "REF-003"}
+    evidence_references = {}
+    annotated = annotate_references("github/*/members.json", evidence_references,
+                                   "https://github.com/example/repo", "deadbeef")
+    assert annotated == "github/*/members.json [REF-001]"
+    assert evidence_references == {"evidence/github/*/members.json": "REF-001"}
     assert reference_target("tools/check_isms.py", "https://github.com/example/repo", "deadbeef") == \
         "https://github.com/example/repo/blob/deadbeef/tools/check_isms.py"
     assert reference_target("evidence/github/*/members.json", "https://github.com/example/repo", "deadbeef") == \
