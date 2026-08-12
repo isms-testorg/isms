@@ -45,7 +45,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            pandoc lmodern texlive-xetex texlive-fonts-recommended texlive-latex-recommended
+            pandoc lmodern texlive-xetex texlive-fonts-recommended texlive-latex-recommended \
+            texlive-latex-extra
 
       - name: Determine version
         id: version

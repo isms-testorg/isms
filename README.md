@@ -65,6 +65,14 @@ make scaffold  # create skeletons for newly declared documents
 Only dependency is PyYAML (`pip install pyyaml`). Pandoc and XeLaTeX are needed
 for `make pdf` and `make pack` only; CI installs them for releases.
 
+### PDF branding
+
+PDFs use the logo at `assets/company-logo.png`, TeX Gyre typography, blue
+section accents, and branded headers. Replace that PNG to use the production
+logo; edit `tools/pdf-theme.tex` for fonts and colours. Tables with 12 or
+more data rows automatically start on landscape pages and may continue across
+further landscape pages.
+
 ## Document frontmatter
 
 Every file under `docs/` carries this block. `make check` enforces it.
