@@ -27,6 +27,7 @@ def main() -> None:
     assert "(#table.colspecs >= 3 and rows >= LARGE_TABLE_ROWS)" in landscape
     assert "tbl.colspecs[column][2] = 1 / columns" in landscape
     assert "WORD_BREAK_LENGTH = 14" in landscape
+    assert 'word.text:match("[/%._%-@]")' in landscape
     assert 'pandoc.RawInline("latex", "\\\\allowbreak{}")' in landscape
     assert "\\renewcommand{\\raggedright}" in theme
     assert "pdfpackcompacttabletrue" in landscape

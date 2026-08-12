@@ -33,7 +33,7 @@ local function wrap_columns(tbl)
   end
   return tbl:walk({
     Str = function(word)
-      if utf8.len(word.text) <= WORD_BREAK_LENGTH then
+      if utf8.len(word.text) <= WORD_BREAK_LENGTH or word.text:match("[/%._%-@]") then
         return nil
       end
       local parts, start, length = {}, 1, 0
