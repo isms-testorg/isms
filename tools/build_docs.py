@@ -25,6 +25,8 @@ import zipfile
 from isms import DOCS, LANGS, ROOT, split_frontmatter
 
 ORG = "dev-test"
+PDF_THEME = os.path.join(ROOT, "tools", "pdf-theme.tex")
+LANDSCAPE_TABLES = os.path.join(ROOT, "tools", "landscape-tables.lua")
 
 PACK_TITLE = {
     "en": "Information Security Management System",
@@ -154,11 +156,28 @@ def build_pack(lang: str, build: str, version: str, states: dict) -> str:
     return pack
 
 
-def pandoc(pack: str, fmt: str) -> str:
+def pandoc_command(pack: str, fmt: str) -> tuple[str, list[str]]:
     out = os.path.splitext(pack)[0] + ("." + fmt)
     cmd = ["pandoc", pack, "-o", out, "--from", "markdown", "--standalone"]
     if fmt == "pdf":
-        cmd += ["--pdf-engine", "xelatex"]
+        cmd += [
+            "--pdf-engine", "xelatex",
+            "--include-in-header", PDF_THEME,
+            "--lua-filter", LANDSCAPE_TABLES,
+            "--variable", "mainfont=TeX Gyre Pagella",
+            "--variable", "sansfont=TeX Gyre Heros",
+            "--variable", "monofont=Latin Modern Mono",
+            "--variable", "fontsize=10.5pt",
+            "--variable", "linestretch=1.12",
+            "--variable", "colorlinks=true",
+            "--variable", "linkcolor=BrandBlue",
+            "--variable", "urlcolor=BrandBlue",
+        ]
+    return out, cmd
+
+
+def pandoc(pack: str, fmt: str) -> str:
+    out, cmd = pandoc_command(pack, fmt)
     subprocess.run(cmd, check=True, cwd=ROOT)
     print(f"wrote {os.path.relpath(out, ROOT)}")
     return out

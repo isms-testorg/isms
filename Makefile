@@ -20,6 +20,7 @@ test:
 	python3 tools/isms.py
 	python3 tools/test_check_isms.py
 	python3 tools/test_document_state.py
+	python3 tools/test_build_docs.py
 
 render: check
 	python3 tools/render.py --out $(BUILD)
