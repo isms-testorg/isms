@@ -1,0 +1,70 @@
+name: finalize document approval
+
+# A Managing Director team approval authorizes the metadata transition. The
+# bot commit is signed by GitHub through commit_via_api.py. Because stale
+# approvals are dismissed on every push, the final bot commit still requires
+# fresh human review before merge.
+on:
+  pull_request_review:
+    types: [submitted]
+
+permissions:
+  contents: write
+  members: read
+  pull-requests: read
+
+jobs:
+  finalize:
+    if: >-
+      github.event.review.state == 'approved' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install --disable-pip-version-check pyyaml
+
+      - name: Fetch reviews and Managing Director team
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          ORGANIZATION: ${{ github.repository_owner }}
+        run: |
+          gh api --paginate --slurp "repos/${REPOSITORY}/pulls/${PR_NUMBER}/reviews" > "$RUNNER_TEMP/reviews.json"
+          gh api --paginate --slurp "orgs/${ORGANIZATION}/teams/dev-managing-director/members" > "$RUNNER_TEMP/approvers.json"
+
+      - name: Finalize approval metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 tools/finalize_approval.py \
+            --reviews "$RUNNER_TEMP/reviews.json" \
+            --team-members "$RUNNER_TEMP/approvers.json" \
+            --author "${{ github.event.pull_request.user.login }}" \
+            --approved-on "${{ github.event.review.submitted_at }}"
+
+      - name: Commit signed metadata through GitHub API
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          FILES=$(git diff --name-only --diff-filter=M -- docs/en docs/de)
+          if [ -z "$FILES" ]; then
+            echo 'No approval metadata changes.'
+            exit 0
+          fi
+          python3 tools/commit_via_api.py \
+            --branch "$BRANCH" \
+            --base HEAD \
+            --message "docs(approval): record Managing Director approval" \
+            $FILES
