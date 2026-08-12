@@ -5,7 +5,7 @@
 # SHA256 checksums, published as a GitHub Release with build provenance
 # attestation. That bundle is what gets handed to an auditor or a customer.
 #
-# Tag it signed, or the chain report fails the build:
+# Push a signed tag, or create a release from a GitHub-verified commit:
 #   git tag -s v1.0.0 -m "ISMS release 1.0.0" && git push origin v1.0.0
 
 name: release
@@ -95,11 +95,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" \
-            build/isms-${{ steps.version.outputs.value }}.zip \
-            --title "ISMS ${GITHUB_REF_NAME}" \
-            --verify-tag \
-            --notes "ISO/IEC 27001:2022 documentation pack, English and German.
+          if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            gh release upload "${GITHUB_REF_NAME}" \
+              build/isms-${{ steps.version.outputs.value }}.zip --clobber
+          else
+            gh release create "${GITHUB_REF_NAME}" \
+              build/isms-${{ steps.version.outputs.value }}.zip \
+              --title "ISMS ${GITHUB_REF_NAME}" \
+              --verify-tag \
+              --notes "ISO/IEC 27001:2022 documentation pack, English and German.
 
           Contents: the full ISMS as PDF and DOCX per language, the \`data/\` YAML it was
           generated from, \`signature-chain.txt\` proving every commit since the previous
@@ -108,7 +112,8 @@ jobs:
           Verify the tag and the artifact:
 
           \`\`\`
-          git verify-tag ${GITHUB_REF_NAME}
+          GITHUB_REPOSITORY=${GITHUB_REPOSITORY} tools/verify_chain.sh --github "" ${GITHUB_REF_NAME}
           gh attestation verify isms-${{ steps.version.outputs.value }}.zip --repo ${GITHUB_REPOSITORY}
           sha256sum -c SHA256SUMS
           \`\`\`"
+          fi
