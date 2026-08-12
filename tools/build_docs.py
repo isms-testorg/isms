@@ -20,6 +20,7 @@ import re
 import shutil
 import subprocess
 import sys
+from urllib.parse import quote
 import zipfile
 
 from isms import DOCS, LANGS, ROOT, split_frontmatter
@@ -55,10 +56,21 @@ SECTION_TITLES = {
 LEADING_H1 = re.compile(r"\A\s*#\s+.*?\n")
 ATX_HEADING = re.compile(r"^(#{1,5})(\s+\S)")
 FENCE = re.compile(r"^\s*(```|~~~)")
+MARKDOWN_LINK = re.compile(r"(?<!!)\[([^]]+)\]\(([^)]+)\)")
+URL = re.compile(r"(?<!\]\()https?://[^\s<>()]+")
+CODE_FILE_REFERENCE = re.compile(r"`((?:assets|data|docs|evidence|tools)/[^`\s]+)`")
+FILE_REFERENCE = re.compile(
+    r"(?<![\w`])((?:assets|data|docs|evidence|tools)/[\w./*-]+\.[\w-]+)(?![\w/])"
+)
+DIRECTORY_REFERENCE = re.compile(r"(?<![\w`])((?:assets|data|docs|evidence|tools)/)(?![\w/])")
 LATEX_ESCAPES = {
     "&": r"\&", "%": r"\%", "$": r"\$", "#": r"\#", "_": r"\_",
     "{": r"\{", "}": r"\}", "~": r"\textasciitilde{}",
     "^": r"\textasciicircum{}", "\\": r"\textbackslash{}",
+}
+APPENDIX_TITLE = {
+    "en": "Appendix - Repository references",
+    "de": "Anhang - Repository-Referenzen",
 }
 
 
@@ -88,6 +100,57 @@ def pdf_header(pack: str, stamp: str, version: str) -> str:
         out.write(f"\n\\renewcommand{{\\pdfpackdate}}{{{escape(stamp)}}}\n")
         out.write(f"\\renewcommand{{\\pdfpackversion}}{{{escape(version)}}}\n")
     return path
+
+
+def repository_url() -> str | None:
+    """Return the GitHub web URL for the checked-out repository, if known."""
+    if os.environ.get("GITHUB_REPOSITORY"):
+        return f"https://github.com/{os.environ['GITHUB_REPOSITORY']}"
+    try:
+        remote = subprocess.run(["git", "remote", "get-url", "origin"], cwd=ROOT,
+                                capture_output=True, text=True, check=True).stdout.strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+    if remote.startswith("git@github.com:"):
+        remote = "https://github.com/" + remote.removeprefix("git@github.com:")
+    return remote.removesuffix(".git") if remote.startswith("https://github.com/") else None
+
+
+def repository_revision() -> str | None:
+    try:
+        return subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True,
+                              text=True, check=True).stdout.strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+
+
+def reference_target(reference: str, repo: str | None, revision: str | None) -> str:
+    """Resolve a URL or repository path for the reference appendix."""
+    if reference.startswith(("http://", "https://")) or not repo or not revision:
+        return reference
+    if "*" in reference or reference.endswith("/"):
+        directory = reference.split("*", 1)[0].rstrip("/")
+        return f"{repo}/tree/{revision}/{quote(directory, safe='/')}"
+    return f"{repo}/blob/{revision}/{quote(reference, safe='/')}"
+
+
+def annotate_references(body: str, references: dict[str, str], repo: str | None,
+                        revision: str | None) -> str:
+    """Append stable IDs to URLs and repository file references in a pack body."""
+    def label(reference: str) -> str:
+        if reference not in references:
+            references[reference] = f"REF-{len(references) + 1:03d}"
+        return references[reference]
+
+    body = MARKDOWN_LINK.sub(
+        lambda match: f"[{match.group(1)}]({match.group(2)}) [{label(match.group(2))}]", body)
+    body = URL.sub(lambda match: f"{match.group(0)} [{label(match.group(0))}]", body)
+    body = CODE_FILE_REFERENCE.sub(
+        lambda match: f"`{match.group(1)}` [{label(match.group(1))}]", body)
+    body = FILE_REFERENCE.sub(
+        lambda match: f"{match.group(1)} [{label(match.group(1))}]", body)
+    return DIRECTORY_REFERENCE.sub(
+        lambda match: f"{match.group(1)} [{label(match.group(1))}]", body)
 
 
 def doc_header_table(meta: dict, lang: str, state: dict | None) -> list[str]:
@@ -145,6 +208,8 @@ def build_pack(lang: str, build: str, version: str, states: dict) -> str:
     ]
 
     current_section = None
+    references: dict[str, str] = {}
+    repo, revision = repository_url(), repository_revision()
     for section, path in sources:
         if section != current_section:
             lines += ["", f"# {SECTION_TITLES[section][lang]}", ""]
@@ -152,16 +217,26 @@ def build_pack(lang: str, build: str, version: str, states: dict) -> str:
         with open(path, encoding="utf-8") as fh:
             meta, body = split_frontmatter(fh.read())
         title = (meta or {}).get("title")
-        body = demote_headings(LEADING_H1.sub("", body, count=1))
+        body = annotate_references(demote_headings(LEADING_H1.sub("", body, count=1)),
+                                   references, repo, revision)
         if not title:
             # Generated documents carry no frontmatter; their own H1 is the title.
             with open(path, encoding="utf-8") as fh:
                 first = fh.readline().strip()
             title = first.lstrip("# ").strip() or os.path.basename(path)
+        if section == "generated":
+            lines += ["```{=latex}", r"\clearpage", "```", ""]
         lines += ["", f"## {title}", ""]
         if meta:
             lines += doc_header_table(meta, lang, states.get(meta.get("id")))
         lines += [body.strip(), ""]
+
+    if references:
+        lines += ["", f"# {APPENDIX_TITLE[lang]}", "",
+                  "| ID | Reference |", "|---|---|"]
+        for reference, identifier in references.items():
+            lines.append(f"| {identifier} | [{reference}]({reference_target(reference, repo, revision)}) |")
+        lines.append("")
 
     outdir = os.path.join(build, lang)
     os.makedirs(outdir, exist_ok=True)

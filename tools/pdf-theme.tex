@@ -30,7 +30,7 @@
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
 \arrayrulecolor{BrandRule}
-\AtBeginEnvironment{longtable}{\renewcommand{\arraystretch}{1.25}\setlength{\tabcolsep}{6pt}}
+\AtBeginEnvironment{longtable}{\renewcommand{\arraystretch}{1.45}\setlength{\tabcolsep}{4pt}\setlength{\extrarowheight}{1pt}}
 \raggedbottom
 \widowpenalty=10000
 \clubpenalty=10000
@@ -61,3 +61,37 @@
   \renewcommand{\headrulewidth}{0.4pt}
   \renewcommand{\headrule}{\hbox to\headwidth{\color{BrandRule}\leaders\hrule height \headrulewidth\hfill}}
 }
+% pdflscape rotates its page view after TeX has placed fancyhdr's portrait
+% chrome. Draw equivalent chrome in the landscape content area instead.
+\newif\ifpdfpacklandscape
+\ExplSyntaxOn
+\coffin_new:N \g_pdfpack_landscape_header_coffin
+\coffin_new:N \g_pdfpack_landscape_footer_coffin
+\dim_new:N \g_pdfpack_textwidth_dim
+\dim_new:N \g_pdfpack_textheight_dim
+\hook_gput_code:nnn { begindocument/end } { . }
+  { \dim_gset:Nn \g_pdfpack_textwidth_dim { \textwidth }
+    \dim_gset:Nn \g_pdfpack_textheight_dim { \textheight } }
+\hook_gput_code:nnn { env/landscape/begin } { . }
+  { \pdfpacklandscapetrue
+    \addtolength{\topmargin}{12mm}
+    \addtolength{\textheight}{-24mm}
+    \thispagestyle{empty} \pagestyle{empty} }
+\hook_gput_code:nnn { shipout/foreground } { . }
+  {
+    \ifpdfpacklandscape
+      \vcoffin_set:Nnn \g_pdfpack_landscape_header_coffin { \g_pdfpack_textheight_dim }
+        { \includegraphics[height=7mm]{assets/company-logo.png}\hfill\small\color{BrandInk}\leftmark }
+      \coffin_rotate:Nn \g_pdfpack_landscape_header_coffin { 90 }
+      \put (\dim_eval:n { \oddsidemargin + 1in - \headsep },
+            \dim_eval:n { -1in - \topmargin - .5\g_pdfpack_textheight_dim - \headheight - \headsep })
+        { \coffin_typeset:Nnnnn \g_pdfpack_landscape_header_coffin { b } { hc } { 0pt } { 0pt } }
+      \vcoffin_set:Nnn \g_pdfpack_landscape_footer_coffin { \g_pdfpack_textheight_dim }
+        { \small\color{BrandInk}Created~\pdfpackdate\hfill Version~\pdfpackversion\hfill \thepage }
+      \coffin_rotate:Nn \g_pdfpack_landscape_footer_coffin { 90 }
+      \put (\dim_eval:n { \footskip + \oddsidemargin + 1in + \g_pdfpack_textwidth_dim },
+            \dim_eval:n { -1in - \topmargin - .5\g_pdfpack_textheight_dim - \headheight - \headsep })
+        { \coffin_typeset:Nnnnn \g_pdfpack_landscape_footer_coffin { t } { hc } { 0pt } { 0pt } }
+    \fi
+  }
+\ExplSyntaxOff

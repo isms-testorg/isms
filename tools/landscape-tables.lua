@@ -30,7 +30,8 @@ function Pandoc(doc)
         table.insert(blocks, heading)
       end
       table.insert(blocks, block)
-      table.insert(blocks, pandoc.RawBlock("latex", "\\end{landscape}\\clearpage"))
+      table.insert(blocks, pandoc.RawBlock(
+        "latex", "\\end{landscape}\\clearpage\\pdfpacklandscapefalse\\pagestyle{fancy}"))
     else
       table.insert(blocks, block)
     end

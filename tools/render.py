@@ -141,7 +141,7 @@ def table(headers: list[str], rows: list[list]) -> list[str]:
 def header(t: dict, title: str, intro: str, commit: str) -> list[str]:
     stamp = dt.date.today().isoformat()
     return [f"# {title}", "",
-            f"*{t['generated']} {stamp} {t['from_commit']} `{commit}`*", "",
+            f"*{t['generated']} {stamp} {t['from_commit']} {commit}*", "",
             intro, ""]
 
 
