@@ -1,7 +1,7 @@
 # Clause 7.5.3 in automation form: documents whose review date is approaching
-# or has passed get an issue assigned to their owner, and the issue closes
-# itself once the document has been reviewed. The trail of opened and closed
-# issues is the evidence that reviews actually happen.
+# or has passed get an issue routed to their owner, and the issue closes itself
+# once the document has been reviewed. The trail of opened and closed issues is
+# the evidence that reviews actually happen.
 
 name: review-due
 
@@ -15,10 +15,6 @@ on:
       horizon_days:
         description: How many days ahead to warn
         default: "30"
-      include_drafts:
-        description: Also raise issues for documents never approved
-        type: boolean
-        default: false
       dry_run:
         description: Report only, create nothing
         type: boolean
@@ -27,12 +23,15 @@ on:
 permissions:
   contents: read
   issues: write
+  pull-requests: read
 
 jobs:
   review-due:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -40,11 +39,16 @@ jobs:
 
       - run: pip install --disable-pip-version-check pyyaml
 
+      - name: Derive document approval state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/document_state.py --release --out build/document-state.json
+
       - name: Raise and close review issues
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python3 tools/review_due.py \
             --horizon-days "${{ inputs.horizon_days || 30 }}" \
-            ${{ inputs.include_drafts && '--include-drafts' || '' }} \
+            --document-state build/document-state.json \
             ${{ inputs.dry_run && '--dry-run' || '' }}

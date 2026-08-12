@@ -3,11 +3,7 @@ id: pol-hr-security
 title: Richtlinie für Personalsicherheit
 lang: de
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 12
 classification: internal
 controls: [A.6.1, A.6.2, A.6.3, A.6.4, A.6.5, A.6.6]

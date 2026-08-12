@@ -20,14 +20,13 @@ are the known backlog; do not add to it.
    - **patch** — typo, formatting, a clearer sentence with the same meaning
    - **minor** — new requirement, changed scope, new control mapped
    - **major** — the policy now says something materially different
-3. If the change was reviewed and approved, set `status: approved`, `approver`,
-   `approved_on`, and `next_review` to exactly `approved_on` plus
-   `review_cycle_months`. The check does that arithmetic and will reject a
-   mismatch.
+3. Keep the document `owner` accountable for accuracy and review readiness.
+   The required CODEOWNER reviewer is the independent approver; CI derives the
+   review state, approval date, and next-review date from GitHub after merge.
 4. Fill in the pull request template honestly. It is the change record.
 
-Editorial-only changes do not need `approved_on` moved. A change of meaning
-does — that is a new approval.
+Any source change is a new revision and appears as `in_review` in the pull
+request preview. Do not edit approval metadata by hand.
 
 ## Adding a document
 
@@ -105,4 +104,4 @@ git push origin v1.0.0
 
 The tag must be signed. The release workflow runs `check_isms.py --strict`,
 which fails on any warning, so a release pack never contains an undecided
-control, an unjustified exclusion, a draft document or a `TODO`.
+control, an unjustified exclusion, or a `TODO`.

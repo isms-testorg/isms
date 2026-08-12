@@ -3,11 +3,7 @@ id: proc-internal-audit
 title: Verfahren für interne Audits
 lang: de
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 24
 classification: internal
 controls: []

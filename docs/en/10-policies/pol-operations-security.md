@@ -3,11 +3,7 @@ id: pol-operations-security
 title: Operations Security Policy
 lang: en
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 12
 classification: internal
 controls: [A.5.37, A.8.6, A.8.7, A.8.8, A.8.9, A.8.13, A.8.15, A.8.16, A.8.17, A.8.19, A.8.32, A.8.34]

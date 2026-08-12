@@ -1,7 +1,7 @@
 # Required status check for main. If this fails, the merge would leave the
 # management system internally inconsistent: a policy pointing at a control
-# that does not exist, a risk treated by an excluded control, a review date
-# that does not match the review cycle, or the two languages out of sync.
+# that does not exist, a risk treated by an excluded control, or the two
+# languages out of sync. Document approval metadata is derived below.
 
 name: validate
 
@@ -13,12 +13,15 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -35,11 +38,28 @@ jobs:
       - name: Validate the ISMS
         run: python3 tools/check_isms.py
 
+      - name: Mark changed documents in review
+        if: github.event_name == 'pull_request'
+        run: |
+          python3 tools/document_state.py --pr \
+            --base "${{ github.event.pull_request.base.sha }}" \
+            --head "${{ github.event.pull_request.head.sha }}" \
+            --out build/document-state.json
+
+      - name: Derive approved document state
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/document_state.py --release --out build/document-state.json
+
       - name: Render the derived documents
-        run: python3 tools/render.py --out build
+        run: python3 tools/render.py --out build --document-state build/document-state.json
 
       - name: Assemble the document pack
-        run: python3 tools/build_docs.py --out build --version "pr-${{ github.event.pull_request.number || github.sha }}"
+        run: |
+          python3 tools/build_docs.py --out build \
+            --version "pr-${{ github.event.pull_request.number || github.sha }}" \
+            --document-state build/document-state.json
 
       # Rendering is not committed, so this is the only way to read the
       # resulting Statement of Applicability before approving a change.

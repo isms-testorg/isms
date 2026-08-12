@@ -3,11 +3,7 @@ id: ctx-organisation
 title: Organisational Context and Interested Parties
 lang: en
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 12
 classification: internal
 controls: [A.5.5, A.5.6]

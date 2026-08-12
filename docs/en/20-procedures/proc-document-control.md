@@ -3,11 +3,7 @@ id: proc-document-control
 title: Control of Documented Information
 lang: en
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 24
 classification: internal
 controls: []
@@ -27,11 +23,11 @@ TODO
 
 ## 3. Roles and responsibilities
 
-TODO
+The document owner maintains accuracy, bilingual consistency, and review readiness. Authors propose changes. The required CODEOWNER reviewer independently approves the final pull-request revision. GitHub records the review and merge; the pipeline derives lifecycle status, approver, approval date, and next-review date.
 
 ## 4. Requirements
 
-TODO
+Source frontmatter contains only stable metadata: identifier, title, language, version, owner, review cycle, classification, and applicable controls. Changed documents appear as `in_review` in pull-request previews. After independent approval and merge, release and review workflows derive `approved` metadata from GitHub without modifying the reviewed source revision.
 
 ## 5. Exceptions
 

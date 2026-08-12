@@ -22,6 +22,7 @@ from check_isms import (
     check_risks,
     check_soa,
     check_translation_parity,
+    newest_collection_date,
 )
 
 TODAY = dt.date(2026, 8, 10)
@@ -35,8 +36,7 @@ CONTROLS = {
 def doc(**overrides):
     meta = {
         "id": "pol-access-control", "title": "Access Control Policy", "lang": "en",
-        "version": "1.0.0", "status": "approved", "owner": "@alice", "approver": "@bob",
-        "approved_on": dt.date(2026, 1, 15), "next_review": dt.date(2027, 1, 15),
+        "version": "1.0.0", "owner": "@alice",
         "review_cycle_months": 12, "classification": "internal", "controls": ["A.5.15"],
     }
     meta.update(overrides)
@@ -99,21 +99,14 @@ def test_documents() -> None:
                                                         {"controls": ["A.9.99"]}), CONTROLS, TODAY),
                  "unknown control 'A.9.99'")
 
-    expect_error("next_review does not match the cycle",
-                 errors_from(check_documents, docs_pair({"next_review": dt.date(2026, 6, 1)}),
-                             CONTROLS, TODAY),
-                 "does not equal approved_on")
+    expect_error("derived lifecycle metadata in source",
+                 errors_from(check_documents, docs_pair({"status": "approved"}), CONTROLS, TODAY),
+                 "pipeline-derived")
 
-    expect_error("review overdue",
-                 errors_from(check_documents,
-                             docs_pair({"approved_on": dt.date(2024, 1, 15),
-                                        "next_review": dt.date(2025, 1, 15)}),
+    expect_error("invalid review cycle",
+                 errors_from(check_documents, docs_pair({"review_cycle_months": 0}),
                              CONTROLS, TODAY),
-                 "review overdue")
-
-    expect_error("approved without an approver",
-                 errors_from(check_documents, docs_pair({"approver": None}), CONTROLS, TODAY),
-                 "no approver is named")
+                 "positive integer")
 
     expect_error("bad version format",
                  errors_from(check_documents, docs_pair({"version": "1.0"}), CONTROLS, TODAY),
@@ -266,6 +259,8 @@ def test_risks() -> None:
 
 def test_objectives_and_evidence() -> None:
     print("objectives and evidence")
+    assert newest_collection_date(["evidence/manual/2026-08-restore-test.md"]) == dt.date(2026, 8, 1)
+    assert newest_collection_date(["evidence/github/2026-07/members.json"]) == dt.date(2026, 7, 1)
     good = {"objectives": [{"id": "OBJ-01", "target": "100%", "measurement": "monthly",
                             "responsible": "@alice", "due": dt.date(2026, 12, 31),
                             "risks": ["R-001"]}]}

@@ -33,17 +33,16 @@ from isms import (
     load_yaml,
 )
 
-DOC_STATUS = {"draft", "in_review", "approved", "retired"}
 SOA_STATUS = {"not_assessed", "planned", "partially_implemented", "implemented", "not_applicable"}
 SOA_KEYS = {"id", "applicable", "status", "implementation_note_en", "implementation_note_de",
             "justification_en", "justification_de"}
 RISK_STATUS = {"open", "in_treatment", "treated", "accepted", "closed"}
 TREATMENTS = {"modify", "retain", "avoid", "share"}
 CLASSIFICATIONS = {"public", "internal", "confidential", "restricted"}
-REQUIRED_DOC_FIELDS = ("id", "title", "lang", "version", "status", "owner",
+REQUIRED_DOC_FIELDS = ("id", "title", "lang", "version", "owner",
                        "review_cycle_months", "classification")
+DERIVED_DOC_FIELDS = {"status", "approver", "approved_on", "next_review"}
 SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
-REVIEW_WARN_DAYS = 30
 
 
 class Report:
@@ -86,51 +85,26 @@ def check_documents(rep: Report, docs: dict, controls: dict, today: dt.date) -> 
             for field in REQUIRED_DOC_FIELDS:
                 if meta.get(field) in (None, ""):
                     rep.error(where, f"frontmatter is missing required field '{field}'")
+            for field in sorted(DERIVED_DOC_FIELDS.intersection(meta)):
+                rep.error(where, f"'{field}' is pipeline-derived and must not be stored in frontmatter")
 
             if doc_id != doc["filename_id"]:
                 rep.error(where, f"frontmatter id '{doc_id}' does not match the filename")
             if meta.get("lang") != lang:
                 rep.error(where, f"frontmatter lang '{meta.get('lang')}' but file is under docs/{lang}/")
-            if meta.get("status") not in DOC_STATUS:
-                rep.error(where, f"status '{meta.get('status')}' is not one of {sorted(DOC_STATUS)}")
             if meta.get("classification") not in CLASSIFICATIONS:
                 rep.error(where, f"classification '{meta.get('classification')}' is not one of {sorted(CLASSIFICATIONS)}")
             version = str(meta.get("version", ""))
             if not SEMVER_RE.match(version):
                 rep.error(where, f"version '{version}' is not MAJOR.MINOR.PATCH")
+            cycle = meta.get("review_cycle_months")
+            if not isinstance(cycle, int) or isinstance(cycle, bool) or cycle <= 0:
+                rep.error(where, "review_cycle_months must be a positive integer")
 
             for ctrl in meta.get("controls") or []:
                 if ctrl not in controls:
                     rep.error(where, f"references unknown control '{ctrl}'")
 
-            cycle = meta.get("review_cycle_months")
-            approved_on = as_date(meta.get("approved_on"))
-            next_review = as_date(meta.get("next_review"))
-            status = meta.get("status")
-
-            if status == "approved":
-                if approved_on is None:
-                    rep.error(where, "status is 'approved' but approved_on is missing or not a date")
-                if not meta.get("approver"):
-                    rep.error(where, "status is 'approved' but no approver is named")
-                if meta.get("approver") and meta.get("approver") == meta.get("owner"):
-                    rep.warn(where, "approver is the same person as the owner; clause 7.5.2 approval is weaker")
-            elif status == "draft":
-                rep.bulk("docs/", "not yet approved documented information", where)
-
-            if approved_on and isinstance(cycle, int) and cycle > 0:
-                expected = add_months(approved_on, cycle)
-                if next_review is None:
-                    rep.error(where, f"next_review is missing, expected {expected.isoformat()}")
-                elif next_review != expected:
-                    rep.error(where, f"next_review {next_review.isoformat()} does not equal "
-                                     f"approved_on + {cycle} months ({expected.isoformat()})")
-
-            if next_review and status not in ("retired", "draft"):
-                if next_review < today:
-                    rep.error(where, f"review overdue since {next_review.isoformat()}")
-                elif (next_review - today).days <= REVIEW_WARN_DAYS:
-                    rep.warn(where, f"review due on {next_review.isoformat()}")
 
 
 def check_translation_parity(rep: Report, docs: dict) -> None:
@@ -149,9 +123,6 @@ def check_translation_parity(rep: Report, docs: dict) -> None:
                                      f"{en['meta'].get('version')}; translations are out of sync")
         if set(en["meta"].get("controls") or []) != set(de["meta"].get("controls") or []):
             rep.error(de["relpath"], "controls list differs from the English version")
-        if en["meta"].get("status") != de["meta"].get("status"):
-            rep.warn(de["relpath"], f"status '{de['meta'].get('status')}' differs from the English "
-                                    f"'{en['meta'].get('status')}'")
 
 
 def documents_by_control(docs: dict) -> dict[str, list[str]]:
@@ -395,8 +366,12 @@ def newest_collection_date(paths: list[str]) -> dt.date | None:
     dates = []
     for path in paths:
         for part in path.split(os.sep):
-            if re.fullmatch(r"\d{4}-\d{2}", part):
-                dates.append(dt.date(int(part[:4]), int(part[5:]), 1))
+            match = re.search(r"(?<!\d)(\d{4})-(\d{2})(?!\d)", part)
+            if match:
+                try:
+                    dates.append(dt.date(int(match[1]), int(match[2]), 1))
+                except ValueError:
+                    pass
     return max(dates) if dates else None
 
 

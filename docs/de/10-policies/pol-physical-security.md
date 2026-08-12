@@ -3,11 +3,7 @@ id: pol-physical-security
 title: Richtlinie für physische und umgebungsbezogene Sicherheit
 lang: de
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 12
 classification: internal
 controls: [A.7.1, A.7.2, A.7.3, A.7.4, A.7.5, A.7.6, A.7.8, A.7.9, A.7.11, A.7.12, A.7.13]

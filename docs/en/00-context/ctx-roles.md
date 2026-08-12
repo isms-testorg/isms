@@ -3,11 +3,7 @@ id: ctx-roles
 title: Information Security Roles and Responsibilities
 lang: en
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 12
 classification: internal
 controls: [A.5.2, A.5.3, A.5.4]
@@ -27,11 +23,11 @@ TODO
 
 ## 3. Roles and responsibilities
 
-TODO
+The document owner is accountable for accuracy, bilingual consistency, and review readiness. An author proposes changes through a pull request and may be the owner or another contributor. The approver is the required CODEOWNER reviewer who independently approves the final pull-request revision. GitHub records the author and approver; the pipeline derives the approval dates. Owners and authors do not self-approve.
 
 ## 4. Requirements
 
-TODO
+Repository permissions and CODEOWNERS enforce separation between authorship, ownership, and approval. The owner addresses review findings and keeps the document current. The approver confirms that the final revision is suitable before merge. Where staffing prevents full separation, management records the limitation and a compensating review.
 
 ## 5. Exceptions
 

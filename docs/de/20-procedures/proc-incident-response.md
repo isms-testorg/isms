@@ -3,11 +3,7 @@ id: proc-incident-response
 title: Verfahren für die Reaktion auf Vorfälle
 lang: de
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 12
 classification: internal
 controls: [A.5.25, A.5.26, A.5.27, A.5.28]

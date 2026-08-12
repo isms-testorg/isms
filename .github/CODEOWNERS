@@ -1,33 +1,32 @@
-# Approval record for the ISMS.
+# Approval routing for the ISMS.
 #
-# A merge into main requires review from the owner listed here. Combined with
-# branch protection this enforces approver != author, which is the evidence an
-# auditor looks for under ISO/IEC 27001:2022 clause 7.5.2 (approval of
-# documented information).
+# A merge into main requires review from the approver team listed here. Document
+# owners are recorded in frontmatter and remain accountable for content; they
+# are not the approval role. Combined with branch protection this records an
+# independent approver for the exact merged revision.
 #
-# Replace the placeholder handles below with real GitHub accounts before
-# enabling branch protection. Teams (@org/team) are preferred over individuals
-# so that approval does not depend on one person being available.
+# Replace the placeholder teams below with real, non-owner approver teams before
+# enabling branch protection. Teams avoid approval depending on one person.
 
 # Fallback: anything not matched more specifically
-*                       @isms-testorg/dev-isms-owner
+*                       @isms-testorg/dev-managing-director
 
 # Data layer — changes here move the SoA and the risk picture
-/data/                  @isms-testorg/dev-isms-owner
-/data/risks.yml         @isms-testorg/dev-isms-owner
-/data/soa.yml           @isms-testorg/dev-isms-owner
+/data/                  @isms-testorg/dev-managing-director
+/data/risks.yml         @isms-testorg/dev-managing-director
+/data/soa.yml           @isms-testorg/dev-managing-director
 
 # Automation — a change here can weaken every check
-/tools/                 @isms-testorg/dev-isms-owner
-/.github/               @isms-testorg/dev-isms-owner
+/tools/                 @isms-testorg/dev-managing-director
+/.github/               @isms-testorg/dev-managing-director
 
 # Governing documents (clause 4-10)
-/docs/en/00-context/    @isms-testorg/dev-isms-owner
-/docs/de/00-context/    @isms-testorg/dev-isms-owner
-/docs/en/20-procedures/ @isms-testorg/dev-isms-owner
-/docs/de/20-procedures/ @isms-testorg/dev-isms-owner
+/docs/en/00-context/    @isms-testorg/dev-managing-director
+/docs/de/00-context/    @isms-testorg/dev-managing-director
+/docs/en/20-procedures/ @isms-testorg/dev-managing-director
+/docs/de/20-procedures/ @isms-testorg/dev-managing-director
 
 # Topic policies — delegate per area once owners are known, e.g.
 # /docs/*/10-policies/secure-development-policy.md  @isms-testorg/engineering
-/docs/en/10-policies/   @isms-testorg/dev-isms-owner
-/docs/de/10-policies/   @isms-testorg/dev-isms-owner
+/docs/en/10-policies/   @isms-testorg/dev-managing-director
+/docs/de/10-policies/   @isms-testorg/dev-managing-director

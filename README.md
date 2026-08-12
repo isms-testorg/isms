@@ -75,23 +75,25 @@ id: pol-access-control        # must equal the filename, and match across langua
 title: Access Control Policy
 lang: en                      # must match the directory
 version: 1.2.0                # MAJOR.MINOR.PATCH, identical in both languages
-status: draft                 # draft | in_review | approved | retired
-owner: "@handle"
-approver: "@other-handle"     # required once approved, should differ from owner
-approved_on: 2026-08-01
-next_review: 2027-08-01       # must equal approved_on + review_cycle_months
+owner: "@handle"              # accountable for accuracy and review readiness
 review_cycle_months: 12
 classification: internal      # public | internal | confidential | restricted
 controls: [A.5.15, A.8.2]     # must be identical in both languages
 ---
 ```
 
+Approval metadata is pipeline-owned. A changed document is shown as `in_review`
+in its pull-request preview. After a required independent CODEOWNER approval and
+merge, the release pipeline derives `approved`, the approver, the merge date,
+and the next-review date. The document owner is accountable for the content;
+the approver is the GitHub reviewer, so neither is hand-entered in frontmatter.
+
 ## Automation
 
 | Workflow | Trigger | What it does |
 |---|---|---|
-| `validate` | every PR and push to main | Runs all consistency checks, renders the pack, uploads a preview artifact. Required status check. |
-| `review-due` | Mondays 06:00 UTC | Opens an issue for each document within 30 days of its review date, assigns the owner, closes it once reviewed. |
+| `validate` | every PR and push to main | Runs consistency checks, marks changed documents `in_review` in the preview, renders the pack, uploads an artifact. Required status check. |
+| `review-due` | Mondays 06:00 UTC | Opens an owner-routed issue for each document within 30 days of its review date and closes it once reviewed. |
 | `evidence-collect` | 1st of the month 03:00 UTC | Snapshots the GitHub organisation's security configuration into `evidence/github/YYYY-MM/`, opens a PR. |
 | `release` | signed tag `v*` | Strict validation, PDF and DOCX in both languages, signature chain report, checksums, provenance attestation, GitHub Release. |
 
@@ -162,11 +164,11 @@ The separate **Settings → Actions → General → Workflow permissions** optio
 enabled for the evidence workflow to open its pull request. This is independent
 of the PAT permissions above.
 
-**5. Fill in the content.** `make check` currently reports the real backlog:
-56 controls with no applicability decision, 25 documents still in draft, and
-the `TODO` placeholders in the data files. A release cannot be tagged until
-those are gone — `release` runs `check_isms.py --strict`, which fails on any
-warning.
+**5. Fill in the content.** `make check` reports incomplete applicability,
+evidence and placeholder content as the real backlog. A release cannot be
+tagged until those findings are gone — `release` runs `check_isms.py --strict`,
+which fails on any warning, then verifies derived approval state through
+GitHub's review history.
 
 ## Known limitations
 
