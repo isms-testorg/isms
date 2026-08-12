@@ -30,7 +30,10 @@
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
 \arrayrulecolor{BrandRule}
-\setlength{\emergencystretch}{2em}
+% Pandoc uses \raggedright in fixed-width table columns. The stock command
+% disables hyphenation, which makes long German compound words overflow.
+\let\pdfpackraggedright\raggedright
+\renewcommand{\raggedright}{\pdfpackraggedright\hyphenpenalty=50\exhyphenpenalty=50\relax}
 \newif\ifpdfpackcompacttable
 \AtBeginEnvironment{longtable}{%
   \ifpdfpackcompacttable
