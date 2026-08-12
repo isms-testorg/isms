@@ -24,7 +24,7 @@ def main() -> None:
     assert "function Pandoc(doc)" in landscape
     assert "rows >= 6" in landscape
     assert "pdfpackcompacttabletrue" in landscape
-    assert "row_count(next_block) * 3 + 2" in landscape
+    assert r"\\Needspace{16\\baselineskip}" in landscape
     assert 'heading.t == "Header"' in landscape
     assert "pdfpacklandscapefalse" in landscape
     assert "\\ifpdfpackcompacttable" in theme

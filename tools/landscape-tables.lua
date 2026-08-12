@@ -29,12 +29,11 @@ function Pandoc(doc)
   local blocks = {}
   for index, block in ipairs(doc.blocks) do
     local next_block = doc.blocks[index + 1]
-    if block.t == "Header" and next_block and next_block.t == "Table" and is_compact(next_block) then
-      -- Keep one generated key/value record together. Its table can fit on a
-      -- page, but longtable otherwise starts it in the remaining space and
-      -- leaves the tail on the next page.
-      local lines = math.min(34, row_count(next_block) * 3 + 2)
-      table.insert(blocks, pandoc.RawBlock("latex", "\\Needspace{" .. lines .. "\\baselineskip}"))
+    if block.t == "Header" and next_block and next_block.t == "Table"
+      and is_compact(next_block) and row_count(next_block) <= 8 then
+      -- Small generated records fit on one page. Reserve their actual height
+      -- so longtable cannot start the record and move its final rows alone.
+      table.insert(blocks, pandoc.RawBlock("latex", "\\Needspace{16\\baselineskip}"))
       table.insert(blocks, block)
     elseif block.t == "Table" and is_large(block) then
       -- Keep a table's label with its landscape table instead of leaving it
