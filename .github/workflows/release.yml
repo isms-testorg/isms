@@ -21,6 +21,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: read
   id-token: write
   attestations: write
 
@@ -51,13 +52,17 @@ jobs:
         run: echo "value=${GITHUB_REF_NAME#refs/tags/}" >> "$GITHUB_OUTPUT"
 
       # Strict mode fails on every warning, so a release cannot contain an
-      # undecided control, an unwritten justification, a draft document or a
-      # leftover TODO.
+      # undecided control, an unwritten justification or a leftover TODO.
       - name: Validate (strict)
         run: python3 tools/check_isms.py --strict
 
+      - name: Derive document approval state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/document_state.py --release --out build/document-state.json
+
       - name: Render derived documents
-        run: python3 tools/render.py --out build
+        run: python3 tools/render.py --out build --document-state build/document-state.json
 
       - name: Verify the signature chain
         env:
@@ -71,6 +76,7 @@ jobs:
         run: |
           python3 tools/build_docs.py --out build \
             --format pdf --format docx --pack \
+            --document-state build/document-state.json \
             --version "${ISMS_VERSION}"
 
       - uses: actions/attest-build-provenance@v2

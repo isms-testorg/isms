@@ -3,11 +3,7 @@ id: pol-incident-management
 title: Richtlinie für die Handhabung von Informationssicherheitsvorfällen
 lang: de
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 12
 classification: internal
 controls: [A.5.24, A.6.8]

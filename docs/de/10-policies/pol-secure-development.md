@@ -3,11 +3,7 @@ id: pol-secure-development
 title: Richtlinie für sichere Entwicklung
 lang: de
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 12
 classification: internal
 controls: [A.8.4, A.8.25, A.8.26, A.8.27, A.8.28, A.8.29, A.8.30, A.8.31, A.8.33]

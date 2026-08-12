@@ -3,11 +3,7 @@ id: pol-asset-management
 title: Asset Management and Information Classification Policy
 lang: en
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 12
 classification: internal
 controls: [A.5.9, A.5.12, A.5.13, A.7.10, A.7.14, A.8.10]

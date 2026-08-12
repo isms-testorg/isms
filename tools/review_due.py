@@ -3,7 +3,7 @@
 
 Clause 7.5.3 wants documented information to be reviewed and kept suitable.
 Proving that in an audit means showing that reviews were triggered, tracked and
-closed, which is exactly what an issue per overdue document gives you.
+closed, which is exactly what an issue routed to each document owner gives you.
 
 Idempotent: one open issue per document, matched on a marker in the body rather
 than the title, so retitling an issue does not spawn a duplicate.
@@ -49,50 +49,37 @@ def open_issues() -> dict[str, dict]:
     return out
 
 
-def due_documents(docs: dict, today: dt.date, horizon: int,
-                  include_drafts: bool) -> dict[str, dict]:
+def due_documents(docs: dict, states: dict, today: dt.date, horizon: int) -> dict[str, dict]:
     """Documents needing attention, with why."""
     due = {}
     for doc_id, doc in docs["en"].items():
         meta = doc["meta"] or {}
-        if meta.get("status") == "retired":
+        state = states.get(doc_id) or {}
+        if state.get("status") != "approved":
             continue
-        next_review = as_date(meta.get("next_review"))
-        approved_on = as_date(meta.get("approved_on"))
-
-        if meta.get("status") == "draft":
-            # A draft that never gets approved is the quiet way an ISMS dies,
-            # but while the ISMS is being written every document is a draft and
-            # an issue for each one is pure noise. `make check` already lists
-            # them, so this is opt in.
-            if not include_drafts:
-                continue
-            reason = "still in draft and never approved"
-            days = None
-        elif next_review is None:
-            reason = "approved but no next_review date is set"
-            days = None
+        next_review = as_date(state.get("next_review"))
+        if next_review is None:
+            continue
+        days = (next_review - today).days
+        if days < 0:
+            reason = f"review overdue by {-days} days (was due {next_review.isoformat()})"
+        elif days <= horizon:
+            reason = f"review due in {days} days, on {next_review.isoformat()}"
         else:
-            days = (next_review - today).days
-            if days < 0:
-                reason = f"review overdue by {-days} days (was due {next_review.isoformat()})"
-            elif days <= horizon:
-                reason = f"review due in {days} days, on {next_review.isoformat()}"
-            else:
-                continue
+            continue
 
         due[doc_id] = {
             "reason": reason,
             "days": days,
-            "owner": str(meta.get("owner") or "").lstrip("@"),
+            "owner": str(state.get("owner") or meta.get("owner") or "").lstrip("@"),
             "title": meta.get("title", doc_id),
             "version": meta.get("version"),
             "next_review": next_review,
-            "cycle": meta.get("review_cycle_months"),
+            "cycle": state.get("review_cycle_months"),
             "paths": [docs[lang][doc_id]["relpath"] for lang in LANGS if doc_id in docs[lang]],
-            "suggested": (add_months(today, meta["review_cycle_months"]).isoformat()
-                          if isinstance(meta.get("review_cycle_months"), int) else "?"),
-            "approved_on": approved_on,
+            "suggested": (add_months(today, state["review_cycle_months"]).isoformat()
+                          if isinstance(state.get("review_cycle_months"), int) else "?"),
+            "approved_on": as_date(state.get("approved_on")),
         }
     return due
 
@@ -103,6 +90,8 @@ def body_for(doc_id: str, info: dict) -> str:
 
 **{info['title']}** (version {info['version']}) {info['reason']}.
 
+**Owner:** @{info['owner'] or 'unassigned'}
+
 Files to review, in **both** languages:
 
 {files}
@@ -112,14 +101,11 @@ still correct or changes it, and in both language versions:
 
 1. bump `version` in the frontmatter (patch for editorial, minor or major for a
    real change of meaning),
-2. set `approved_on` to the date of approval,
-3. set `next_review` to `approved_on` plus `review_cycle_months`
-   ({info['cycle']} months, so roughly `{info['suggested']}`),
-4. set `status: approved` and name the `approver`.
+2. obtain the required independent CODEOWNER approval. The pipeline records the
+   approver, approval date, and next review date once the pull request merges.
 
-`make check` will reject the pull request if those dates do not line up. This
-issue closes itself on the next scheduled run once the document is no longer
-due.
+This issue closes itself on the next scheduled run once the document is no
+longer due.
 """
 
 
@@ -128,14 +114,16 @@ def main() -> int:
     parser.add_argument("--horizon-days", type=int, default=30,
                         help="how far ahead to warn (default 30)")
     parser.add_argument("--today", help="override today's date (YYYY-MM-DD)")
-    parser.add_argument("--include-drafts", action="store_true",
-                        help="also raise issues for documents never approved")
+    parser.add_argument("--document-state", required=True,
+                        help="JSON generated by tools/document_state.py --release")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
     today = as_date(args.today) or dt.date.today()
     docs = load_docs()
-    due = due_documents(docs, today, args.horizon_days, args.include_drafts)
+    with open(args.document_state, encoding="utf-8") as fh:
+        states = (json.load(fh).get("documents") or {})
+    due = due_documents(docs, states, today, args.horizon_days)
 
     if args.dry_run:
         for doc_id, info in sorted(due.items()):
@@ -156,7 +144,8 @@ def main() -> int:
             updated += 1
         else:
             cmd = ["issue", "create", "--title", title, "--body", body, "--label", LABEL]
-            if info["owner"] and not info["owner"].startswith("TODO"):
+            if (info["owner"] and "/" not in info["owner"]
+                    and not info["owner"].startswith("TODO")):
                 cmd += ["--assignee", info["owner"]]
             print(gh(cmd).strip())
             created += 1

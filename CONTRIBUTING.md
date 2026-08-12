@@ -20,15 +20,13 @@ are the known backlog; do not add to it.
    - **patch** — typo, formatting, a clearer sentence with the same meaning
    - **minor** — new requirement, changed scope, new control mapped
    - **major** — the policy now says something materially different
-3. Leave changed documents as `status: in_review` with blank approval dates.
-   After the Managing Director team approves the final content, the
-   `finalize document approval` workflow records `status: approved`, the
-   review date, and `next_review` through a signed GitHub API commit. Fresh
-   human review is required for that final bot commit.
+3. Keep the document `owner` accountable for accuracy and review readiness.
+   The required CODEOWNER reviewer is the independent approver; CI derives the
+   review state, approval date, and next-review date from GitHub after merge.
 4. Fill in the pull request template honestly. It is the change record.
 
-Editorial-only changes do not need `approved_on` moved. A change of meaning
-does — that is a new approval.
+Any source change is a new revision and appears as `in_review` in the pull
+request preview. Do not edit approval metadata by hand.
 
 ## Adding a document
 
@@ -106,4 +104,4 @@ git push origin v1.0.0
 
 The tag must be signed. The release workflow runs `check_isms.py --strict`,
 which fails on any warning, so a release pack never contains an undecided
-control, an unjustified exclusion, a draft document or a `TODO`.
+control, an unjustified exclusion, or a `TODO`.

@@ -132,11 +132,7 @@ def render_document(doc, lang, controls) -> str:
         f"title: {title}",
         f"lang: {lang}",
         "version: 0.1.0",
-        "status: draft",
         'owner: "@isms-testorg/dev-isms-owner"',
-        'approver: "@isms-testorg/dev-managing-director"',
-        "approved_on:",
-        "next_review:",
         f"review_cycle_months: {cycle}",
         f"classification: {classification}",
     ]

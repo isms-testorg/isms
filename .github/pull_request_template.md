@@ -31,6 +31,7 @@ Related issue:
 ## Checklist
 
 - [ ] `make check` passes locally
-- [ ] `version`, `approved_on` and `next_review` in the frontmatter are correct
+- [ ] `version`, `owner` and `review_cycle_months` in the frontmatter are correct
+- [ ] Required independent CODEOWNER approval will be obtained before merge
 - [ ] Commits are signed (`git log --show-signature`)
 - [ ] Editorial-only changes did not bump the major or minor version

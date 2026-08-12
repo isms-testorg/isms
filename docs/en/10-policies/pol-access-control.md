@@ -3,11 +3,7 @@ id: pol-access-control
 title: Access Control Policy
 lang: en
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 12
 classification: internal
 controls: [A.5.15, A.5.16, A.5.17, A.5.18, A.8.2, A.8.3, A.8.5, A.8.18]

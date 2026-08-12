@@ -3,11 +3,7 @@ id: pol-compliance
 title: Richtlinie für rechtliche und regulatorische Konformität
 lang: de
 version: 0.1.0
-status: draft
 owner: "@isms-testorg/dev-isms-owner"
-approver: "@isms-testorg/dev-managing-director"
-approved_on:
-next_review:
 review_cycle_months: 12
 classification: internal
 controls: [A.5.7, A.5.8, A.5.31, A.5.32, A.5.33, A.5.34, A.5.35, A.5.36]
