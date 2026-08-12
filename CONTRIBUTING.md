@@ -21,12 +21,13 @@ are the known backlog; do not add to it.
    - **minor** — new requirement, changed scope, new control mapped
    - **major** — the policy now says something materially different
 3. Keep the document `owner` accountable for accuracy and review readiness.
-   The required CODEOWNER reviewer is the independent approver; CI derives the
-   review state, approval date, and next-review date from GitHub after merge.
+   The required CODEOWNER reviewer is the independent approver; CI records the
+   review state, approval date, and next-review date after merge.
 4. Fill in the pull request template honestly. It is the change record.
 
-Any source change is a new revision and appears as `in_review` in the pull
-request preview. Do not edit approval metadata by hand.
+Any source change is a new revision and is shown as `in_review` in the pull
+request preview. The merged revision becomes approved through GitHub's review
+record; do not edit approval metadata by hand.
 
 ## Adding a document
 

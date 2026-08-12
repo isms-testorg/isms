@@ -49,22 +49,54 @@ evidence:
     valid_months: 3
     owner: "@isms-testorg/dev-engineering-lead"
 
-  # --- Manual evidence: create the file, then uncomment and fill in ---
-  #
-  # - id: EV-RESTORE-TEST
-  #   title_en: Backup restore test record
-  #   title_de: Nachweis des Wiederherstellungstests
-  #   path: "evidence/manual/2026-restore-test.md"
-  #   controls: [A.8.13, A.5.30]
-  #   objectives: [OBJ-03]
-  #   valid_months: 12
-  #   owner: "@isms-testorg/dev-cto"
-  #
-  # - id: EV-TRAINING
-  #   title_en: Security awareness training completion records
-  #   title_de: Nachweise über absolvierte Sicherheitsschulungen
-  #   path: "evidence/manual/2026-awareness-training.csv"
-  #   controls: [A.6.3]
-  #   objectives: [OBJ-05]
-  #   valid_months: 12
-  #   owner: "@isms-testorg/dev-managing-director"
+  # --- Manual fictional demonstration evidence ---
+  - id: EV-RESTORE-TEST
+    title_en: Fictional backup restore test record
+    title_de: Fiktiver Nachweis des Wiederherstellungstests
+    path: "evidence/manual/2026-08-restore-test.md"
+    controls: [A.8.13, A.5.30]
+    objectives: [OBJ-03]
+    valid_months: 12
+    owner: "@isms-testorg/dev-cto"
+
+  - id: EV-TRAINING
+    title_en: Fictional security awareness training completion summary
+    title_de: Fiktive Zusammenfassung absolvierter Sicherheitsschulungen
+    path: "evidence/manual/2026-08-awareness-training.csv"
+    controls: [A.6.3]
+    objectives: [OBJ-05]
+    valid_months: 12
+    owner: "@isms-testorg/dev-managing-director"
+
+  - id: EV-ACCESS-REVIEW
+    title_en: Fictional quarterly privileged access review
+    title_de: Fiktive vierteljährliche Überprüfung privilegierter Zugriffe
+    path: "evidence/manual/2026-08-access-review.md"
+    controls: [A.5.18, A.8.2, A.8.5]
+    valid_months: 12
+    owner: "@isms-testorg/dev-it-lead"
+
+  - id: EV-INCIDENT-EXERCISE
+    title_en: Fictional incident response tabletop exercise
+    title_de: Fiktive Planspielübung zur Reaktion auf Informationssicherheitsvorfälle
+    path: "evidence/manual/2026-08-incident-exercise.md"
+    controls: [A.5.24, A.5.25, A.5.26, A.5.27]
+    valid_months: 12
+    owner: "@isms-testorg/dev-isms-owner"
+
+  - id: EV-SUPPLIER-REVIEW
+    title_en: Fictional critical supplier review summary
+    title_de: Fiktive Zusammenfassung der Überprüfung kritischer Lieferanten
+    path: "evidence/manual/2026-08-supplier-review.md"
+    controls: [A.5.19, A.5.20, A.5.21, A.5.22, A.5.23]
+    valid_months: 12
+    owner: "@isms-testorg/dev-managing-director"
+
+  - id: EV-ISMS-REVIEW
+    title_en: Fictional ISMS review summary
+    title_de: Fiktive Zusammenfassung einer ISMS-Bewertung
+    path: "evidence/manual/2026-08-isms-review.md"
+    controls: [A.5.35, A.5.36]
+    objectives: [OBJ-04]
+    valid_months: 12
+    owner: "@isms-testorg/dev-isms-owner"

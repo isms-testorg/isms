@@ -17,7 +17,7 @@ objectives:
     rationale_de: Reduziert unmittelbar R-001, das höchstbewertete Zugangsdatenrisiko
     target: "100% of GitHub organisation members with 2FA enabled"
     measurement: "Monthly evidence collection from the GitHub organisation members API"
-    baseline: "TODO: record the value from the first evidence collection run"
+    baseline: "92% of members had 2FA enabled at the 2026-08-12 demo baseline"
     responsible: "@isms-testorg/dev-it-lead"
     resources: Existing tooling, no additional budget
     due: 2026-12-31
@@ -31,7 +31,7 @@ objectives:
     rationale_de: Adressiert R-003, Ausnutzung einer bekannten Schwachstelle in einem ausgelieferten Produkt
     target: "95% of critical within 7 days, high within 30 days"
     measurement: "Dependabot and secret scanning alert ages from monthly evidence collection"
-    baseline: "TODO: record the value from the first evidence collection run"
+    baseline: "78% of critical/high alerts met the remediation deadline in the 2026-08-12 demo baseline"
     responsible: "@isms-testorg/dev-engineering-lead"
     resources: Engineering capacity reserved in each sprint
     due: 2026-12-31
@@ -73,7 +73,7 @@ objectives:
     rationale_de: Phishing ist der Übertragungsweg in R-001 und R-008
     target: "100% of staff within 30 days of joining, and annually thereafter"
     measurement: "Training completion records, reviewed quarterly"
-    baseline: "TODO: current completion rate"
+    baseline: "75% of staff had completed the current annual training at the 2026-08-12 demo baseline"
     responsible: "@isms-testorg/dev-managing-director"
     resources: Training platform subscription
     due: 2026-12-31

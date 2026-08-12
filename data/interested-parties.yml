@@ -38,11 +38,11 @@ interested_parties:
     name_de: Regulierungs- und Aufsichtsbehörden
     requirements_en:
       - Compliance with the GDPR, including breach notification within 72 hours
-      - "TODO: confirm whether NIS2 national transposition applies to the organisation"
+      - Assessment of whether applicable national cyber-security legislation, including any NIS2 transposition, applies to the organisation; the current demo assessment records dev-test as outside the direct-scope threshold, subject to annual review
       - Retention of records as required by commercial and tax law
     requirements_de:
       - Einhaltung der DSGVO, einschließlich Meldung von Verletzungen innerhalb von 72 Stunden
-      - "TODO: prüfen, ob die nationale NIS2-Umsetzung auf die Organisation anwendbar ist"
+      - Bewertung, ob einschlägige nationale Cybersicherheitsvorschriften einschließlich einer NIS2-Umsetzung auf die Organisation anwendbar sind; die aktuelle Demo-Bewertung ordnet dev-test vorbehaltlich der jährlichen Überprüfung außerhalb der direkten Schwelle ein
       - Aufbewahrung von Aufzeichnungen nach handels- und steuerrechtlichen Vorgaben
     monitored_via: Legal register review, at least annually
 
