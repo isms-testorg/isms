@@ -18,14 +18,20 @@ is_attested() {
 }
 
 tag_verified() {
-  [[ "$(git cat-file -t "$1" 2>/dev/null)" == tag ]] || return 1
-  if [[ "$MODE" == github ]]; then
+  local type
+  type="$(git cat-file -t "$1" 2>/dev/null)"
+  if [[ "$MODE" == github && "$type" == commit ]]; then
+    [[ "$(gh api "repos/${GITHUB_REPOSITORY}/commits/$(git rev-parse "$1")" \
+      --jq '.commit.verification.verified' 2>/dev/null)" == true ]]
+  elif [[ "$MODE" == github && "$type" == tag ]]; then
     local tag_sha
     tag_sha="$(git rev-parse "$1^{tag}")"
     [[ "$(gh api "repos/${GITHUB_REPOSITORY}/git/tags/${tag_sha}" \
       --jq '.verification.verified' 2>/dev/null)" == true ]]
-  else
+  elif [[ "$type" == tag ]]; then
     git verify-tag "$1" >/dev/null 2>&1
+  else
+    return 1
   fi
 }
 
@@ -50,7 +56,11 @@ echo
 TAG_BAD=0
 if git show-ref --verify --quiet "refs/tags/${TO}"; then
   if tag_verified "$TO"; then
-    echo "tag ${TO}: SIGNED and verified"
+    if [[ "$(git cat-file -t "$TO")" == tag ]]; then
+      echo "tag ${TO}: SIGNED and verified"
+    else
+      echo "tag ${TO}: lightweight; target commit verified by GitHub"
+    fi
   else
     echo "tag ${TO}: NOT VERIFIED"
     TAG_BAD=1
