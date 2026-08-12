@@ -197,3 +197,103 @@ risks:
     residual_impact: 3
     status: in_treatment
     due: 2026-12-31
+
+  - id: R-009
+    title_en: Excessive privileges allow an unauthorised person to access administrative systems
+    title_de: Übermäßige Berechtigungen ermöglichen einer unbefugten Person den Zugriff auf Administrationssysteme
+    asset_groups: [AG-IDENTITY, AG-SAAS, AG-CUSTDATA]
+    threat_en: Misuse of a dormant, shared, or over-privileged account
+    threat_de: Missbrauch eines ruhenden, gemeinsam genutzten oder überprivilegierten Kontos
+    vulnerability_en: Access is granted by habit and is not consistently removed or reviewed
+    vulnerability_de: Zugriffe werden aus Gewohnheit vergeben und nicht konsequent entzogen oder überprüft
+    owner: "@isms-testorg/dev-it-lead"
+    likelihood: 3
+    impact: 4
+    treatment: modify
+    controls: [A.5.15, A.5.16, A.5.18, A.8.2, A.8.3, A.8.5]
+    treatment_plan_en: Apply least privilege, quarterly access recertification, joiner-mover-leaver tickets, and separate administrative accounts.
+    treatment_plan_de: Least-Privilege-Prinzip anwenden, vierteljährliche Rezertifizierung der Zugriffe, Joiner-Mover-Leaver-Tickets und getrennte Administrationskonten.
+    residual_likelihood: 2
+    residual_impact: 3
+    status: in_treatment
+    due: 2026-11-30
+
+  - id: R-010
+    title_en: Incorrect cloud configuration exposes a service or production data
+    title_de: Eine fehlerhafte Cloud-Konfiguration legt einen Dienst oder Produktionsdaten offen
+    asset_groups: [AG-SAAS, AG-CUSTDATA, AG-SRC]
+    threat_en: Accidental change or automated deployment applies an insecure setting
+    threat_de: Eine versehentliche Änderung oder automatisierte Bereitstellung setzt eine unsichere Einstellung
+    vulnerability_en: Configuration changes are not consistently peer reviewed, tested, or monitored
+    vulnerability_de: Konfigurationsänderungen werden nicht konsequent von Peers geprüft, getestet oder überwacht
+    owner: "@isms-testorg/dev-cto"
+    likelihood: 3
+    impact: 5
+    treatment: modify
+    controls: [A.8.9, A.8.25, A.8.27, A.8.31, A.8.32]
+    treatment_plan_en: Manage infrastructure as code, require reviewed changes, separate test and production environments, and alert on material drift.
+    treatment_plan_de: Infrastruktur als Code verwalten, geprüfte Änderungen verlangen, Test- und Produktionsumgebungen trennen und bei wesentlichen Abweichungen alarmieren.
+    residual_likelihood: 2
+    residual_impact: 4
+    status: open
+    due: 2027-01-31
+
+  - id: R-011
+    title_en: Customer or employee personal data is disclosed to an unauthorised recipient
+    title_de: Personenbezogene Daten von Kunden oder Mitarbeitenden werden einem unbefugten Empfänger offengelegt
+    asset_groups: [AG-CUSTDATA, AG-ENDPOINT, AG-DOCS]
+    threat_en: Misaddressed message, excessive export, or insecure support exchange
+    threat_de: Fehladressierte Nachricht, übermäßiger Export oder unsicherer Support-Austausch
+    vulnerability_en: Data handling rules and retention limits are not consistently applied
+    vulnerability_de: Regeln zur Datenverarbeitung und Aufbewahrungsgrenzen werden nicht konsequent angewendet
+    owner: "@isms-testorg/dev-isms-owner"
+    likelihood: 3
+    impact: 5
+    treatment: modify
+    controls: [A.5.12, A.5.13, A.5.14, A.5.34, A.8.10, A.8.12]
+    treatment_plan_en: Maintain data classification and retention rules, restrict exports, train personnel, and assess suspected disclosures through the incident process.
+    treatment_plan_de: Datenklassifizierungs- und Aufbewahrungsregeln pflegen, Exporte beschränken, Mitarbeitende schulen und vermutete Offenlegungen über das Vorfallverfahren bewerten.
+    residual_likelihood: 2
+    residual_impact: 4
+    status: in_treatment
+    due: 2026-12-31
+
+  - id: R-012
+    title_en: Missed legal or contractual obligation causes a reportable breach or lost customer trust
+    title_de: Eine versäumte gesetzliche oder vertragliche Verpflichtung führt zu einem meldepflichtigen Verstoß oder Vertrauensverlust
+    asset_groups: [AG-DOCS, AG-CUSTDATA, AG-SAAS]
+    threat_en: Regulation, contract, or customer requirement changes without reaching the responsible owner
+    threat_de: Eine Änderung von Vorschrift, Vertrag oder Kundenanforderung erreicht die verantwortliche Person nicht
+    vulnerability_en: Legal and contractual obligations are tracked informally and reviews are not evidenced
+    vulnerability_de: Gesetzliche und vertragliche Verpflichtungen werden informell verfolgt und Überprüfungen nicht nachgewiesen
+    owner: "@isms-testorg/dev-managing-director"
+    likelihood: 2
+    impact: 4
+    treatment: modify
+    controls: [A.5.31, A.5.32, A.5.33, A.5.34]
+    treatment_plan_en: Maintain a legal and contract obligations register, assign owners, review it annually and on material change, and record decisions.
+    treatment_plan_de: Register für gesetzliche und vertragliche Verpflichtungen führen, Verantwortliche benennen, jährlich und bei wesentlichen Änderungen prüfen und Entscheidungen dokumentieren.
+    residual_likelihood: 1
+    residual_impact: 4
+    status: open
+    due: 2027-02-28
+
+  - id: R-013
+    title_en: Backup corruption or an untested recovery procedure prevents timely restoration
+    title_de: Beschädigte Sicherungen oder ein ungeprüftes Wiederherstellungsverfahren verhindern die rechtzeitige Wiederherstellung
+    asset_groups: [AG-CUSTDATA, AG-SAAS, AG-DOCS]
+    threat_en: Silent backup failure, accidental deletion, or incompatible recovery tooling
+    threat_de: Unbemerkter Sicherungsfehler, versehentliches Löschen oder inkompatible Wiederherstellungswerkzeuge
+    vulnerability_en: Backup success is monitored but full restoration and recovery objectives are not regularly demonstrated
+    vulnerability_de: Der Sicherungserfolg wird überwacht, aber vollständige Wiederherstellung und Wiederherstellungsziele werden nicht regelmäßig nachgewiesen
+    owner: "@isms-testorg/dev-cto"
+    likelihood: 3
+    impact: 5
+    treatment: modify
+    controls: [A.5.29, A.5.30, A.8.13, A.8.14]
+    treatment_plan_en: Define RTO and RPO, retain an isolated copy, monitor backup failures, and document an annual restore test for each critical service.
+    treatment_plan_de: RTO und RPO festlegen, eine isolierte Kopie aufbewahren, Sicherungsfehler überwachen und jährlich je kritischem Dienst einen Wiederherstellungstest dokumentieren.
+    residual_likelihood: 2
+    residual_impact: 3
+    status: open
+    due: 2027-03-31

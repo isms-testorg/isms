@@ -25,8 +25,8 @@ asset_groups:
     type: information
     owner: "@isms-testorg/dev-cto"
     classification: restricted
-    location: "TODO: production hosting provider and region"
-    register: "TODO: link to the record of processing activities (GDPR Art. 30)"
+    location: "Fictional production cloud tenant in the EU, primary region eu-central-1"
+    register: "ISMS data-processing register and cloud inventory, maintained by the CTO"
     cia: { c: 5, i: 5, a: 4 }
 
   - id: AG-CREDS
@@ -35,7 +35,7 @@ asset_groups:
     type: information
     owner: "@isms-testorg/dev-cto"
     classification: restricted
-    location: "TODO: secret manager, GitHub Actions secrets"
+    location: "Fictional managed secret manager, GitHub Actions secret store, and break-glass vault"
     cia: { c: 5, i: 5, a: 4 }
 
   - id: AG-ENDPOINT
@@ -45,7 +45,7 @@ asset_groups:
     owner: "@isms-testorg/dev-it-lead"
     classification: internal
     location: Distributed, including home offices
-    register: "TODO: MDM inventory export"
+    register: "Monthly MDM inventory export retained in the ISMS repository"
     cia: { c: 4, i: 3, a: 3 }
 
   - id: AG-SAAS
@@ -55,7 +55,7 @@ asset_groups:
     owner: "@isms-testorg/dev-it-lead"
     classification: internal
     location: External providers
-    register: "TODO: supplier register"
+    register: "Supplier and cloud-service register maintained by the IT lead"
     cia: { c: 4, i: 4, a: 4 }
 
   - id: AG-IDENTITY
@@ -64,7 +64,7 @@ asset_groups:
     type: service
     owner: "@isms-testorg/dev-it-lead"
     classification: restricted
-    location: "TODO: identity provider"
+    location: "Fictional cloud identity provider integrated with GitHub SSO"
     cia: { c: 5, i: 5, a: 5 }
 
   - id: AG-DOCS
@@ -91,5 +91,5 @@ asset_groups:
     type: physical
     owner: "@isms-testorg/dev-managing-director"
     classification: internal
-    location: "TODO: office addresses in scope"
+    location: "Distributed home offices and the fictional registered office in Vienna"
     cia: { c: 3, i: 2, a: 3 }
