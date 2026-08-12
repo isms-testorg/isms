@@ -15,6 +15,7 @@ local function is_large(table)
   local rows = row_count(table)
   return rows >= LARGE_TABLE_ROWS
     or (#table.colspecs >= WIDE_TABLE_COLUMNS and rows >= 6)
+    or (#table.colspecs >= 5 and rows >= 10)
 end
 
 local function is_compact(table)

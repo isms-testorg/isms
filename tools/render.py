@@ -347,10 +347,9 @@ def render_evidence(m: Model, lang: str, commit: str) -> str:
         rows.append([item["id"], item.get(f"title_{lang}"),
                      item.get("path", "").removeprefix("evidence/"),
                      f"{item.get('valid_months', '')} {t['months']}",
-                     item.get("collector") or t["manual"],
                      ", ".join(item.get("controls") or [])])
     out += table(["ID", t["title"], f"{t['path']} (evidence root)", t["valid"],
-                  t["collector"], t["control"]], rows)
+                  t["control"]], rows)
     return "\n".join(out)
 
 

@@ -23,6 +23,7 @@ def main() -> None:
     landscape = Path(LANDSCAPE_TABLES).read_text(encoding="utf-8")
     assert "function Pandoc(doc)" in landscape
     assert "rows >= 6" in landscape
+    assert "rows >= 10" in landscape
     assert "pdfpackcompacttabletrue" in landscape
     assert r"\\Needspace{16\\baselineskip}" in landscape
     assert 'heading.t == "Header"' in landscape
