@@ -1,9 +1,9 @@
 % Shared visual identity for the PDF release pack. Replace the image in
 % assets/company-logo.png to apply a production logo without changing code.
 \usepackage{booktabs,longtable,pdflscape}
+\usepackage{graphicx}
 \usepackage{colortbl}
 \usepackage{fancyhdr}
-\usepackage{titling}
 \usepackage{titlesec}
 \definecolor{BrandBlue}{HTML}{008CFF}
 \definecolor{BrandInk}{HTML}{303238}
@@ -11,15 +11,11 @@
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
 \arrayrulecolor{BrandRule}
-\pretitle{\begin{center}\includegraphics[width=.42\textwidth]{assets/company-logo.png}\par\vspace{1.6cm}\Huge\bfseries\color{BrandInk}}
-\posttitle{\par\end{center}\vspace{.5cm}}
-\preauthor{\begin{center}\large\color{BrandInk}}
-\postauthor{\par\end{center}}
 \titleformat{\section}{\Large\bfseries\color{BrandBlue}}{\thesection}{.7em}{}
 \titleformat{\subsection}{\large\bfseries\color{BrandInk}}{\thesubsection}{.7em}{}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\includegraphics[height=5mm]{assets/company-logo.png}}
+\fancyhead[L]{\small\color{BrandBlue}\textbf{ISMS}}
 \fancyhead[R]{\small\color{BrandInk}\nouppercase{\leftmark}}
 \fancyfoot[C]{\small\color{BrandInk}\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
