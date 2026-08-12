@@ -45,7 +45,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            pandoc texlive-xetex texlive-fonts-recommended texlive-latex-recommended
+            pandoc lmodern texlive-xetex texlive-fonts-recommended texlive-latex-recommended
 
       - name: Determine version
         id: version
@@ -68,6 +68,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -o pipefail
           tools/verify_chain.sh --github | tee build/signature-chain.txt
 
       - name: Build the pack
@@ -102,7 +103,7 @@ jobs:
 
           Contents: the full ISMS as PDF and DOCX per language, the \`data/\` YAML it was
           generated from, \`signature-chain.txt\` proving every commit since the previous
-          tag is signed, and \`SHA256SUMS\`.
+          tag is signed or explicitly attested, and \`SHA256SUMS\`.
 
           Verify the tag and the artifact:
 
