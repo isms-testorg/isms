@@ -50,7 +50,14 @@ jobs:
 
       - name: Determine version
         id: version
-        run: echo "value=${GITHUB_REF_NAME#refs/tags/}" >> "$GITHUB_OUTPUT"
+        env:
+          DISPATCH_VERSION: ${{ inputs.version }}
+        run: |
+          version="${GITHUB_REF_NAME#refs/tags/}"
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
+            version="$DISPATCH_VERSION"
+          fi
+          echo "value=$version" >> "$GITHUB_OUTPUT"
 
       # Strict mode fails on every warning, so a release cannot contain an
       # undecided control, an unwritten justification or a leftover TODO.
