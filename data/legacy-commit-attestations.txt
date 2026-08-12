@@ -1,0 +1,8 @@
+# Exact legacy commits accepted without GitHub-verified signatures.
+# This exception register is introduced by a signed, reviewed commit. Rewriting
+# these hashes would break merged-PR approval provenance used by document state.
+e4e9043dd90ba293f8344f82bb45d14e67932720 unsigned-before-protection
+82e8178e43f27c011ac6384d196ea0f97b672f94 unsigned-before-protection
+fd7ce3543a31103fff5f12bff4ecce6815868254 unsigned-before-protection
+665ff01866feafb2ba5e31be9bbbb9b3e0c11d9e unsigned-before-protection
+079374233aa49c27001229730f685cfbce429145 signed-locally-github-bad-email
