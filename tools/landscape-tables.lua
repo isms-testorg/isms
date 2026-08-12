@@ -13,13 +13,23 @@ end
 
 local function is_large(table)
   local rows = row_count(table)
-  return rows >= LARGE_TABLE_ROWS
+  return (#table.colspecs >= 3 and rows >= LARGE_TABLE_ROWS)
     or (#table.colspecs >= WIDE_TABLE_COLUMNS and rows >= 6)
     or (#table.colspecs >= 5 and rows >= 10)
 end
 
 local function is_compact(table)
   return #table.colspecs == 2
+end
+
+local function wrap_columns(table)
+  local columns = #table.colspecs
+  if columns < 3 then
+    return
+  end
+  for column = 1, columns do
+    table.colspecs[column][2] = 1 / columns
+  end
 end
 
 function Pandoc(doc)
@@ -30,6 +40,11 @@ function Pandoc(doc)
   local blocks = {}
   for index, block in ipairs(doc.blocks) do
     local next_block = doc.blocks[index + 1]
+    if block.t == "Table" then
+      -- Markdown defaults to natural-width LaTeX columns. That lets long
+      -- German text run into its neighbour instead of wrapping.
+      wrap_columns(block)
+    end
     if block.t == "Header" and next_block and next_block.t == "Table"
       and is_compact(next_block) and row_count(next_block) <= 8 then
       -- Small generated records fit on one page. Reserve their actual height
