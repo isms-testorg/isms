@@ -5,19 +5,103 @@
 \usepackage{colortbl}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
+\usepackage{needspace}
+\usepackage{etoolbox}
 \definecolor{BrandBlue}{HTML}{008CFF}
 \definecolor{BrandInk}{HTML}{303238}
 \definecolor{BrandRule}{HTML}{D9E8F5}
+\setmainfont[
+  Path=assets/fonts/,
+  Extension=.otf,
+  UprightFont=SourceSans3-Regular,
+  BoldFont=SourceSans3-Semibold,
+  ItalicFont=SourceSans3-It,
+  BoldItalicFont=SourceSans3-SemiboldIt
+]{SourceSans3-Regular}
+\setsansfont[
+  Path=assets/fonts/,
+  Extension=.otf,
+  UprightFont=SourceSans3-Regular,
+  BoldFont=SourceSans3-Semibold,
+  ItalicFont=SourceSans3-It,
+  BoldItalicFont=SourceSans3-SemiboldIt
+]{SourceSans3-Regular}
+\setmonofont{Latin Modern Mono}
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
 \arrayrulecolor{BrandRule}
+% Pandoc uses \raggedright in fixed-width table columns. The stock command
+% disables hyphenation, which makes long German compound words overflow.
+\let\pdfpackraggedright\raggedright
+\renewcommand{\raggedright}{\pdfpackraggedright\hyphenpenalty=50\exhyphenpenalty=50\relax}
+\newif\ifpdfpackcompacttable
+\AtBeginEnvironment{longtable}{%
+  \ifpdfpackcompacttable
+    \renewcommand{\arraystretch}{1.2}\setlength{\tabcolsep}{4pt}\setlength{\extrarowheight}{1pt}%
+  \else
+    \renewcommand{\arraystretch}{1.45}\setlength{\tabcolsep}{4pt}\setlength{\extrarowheight}{1pt}%
+  \fi}
+\raggedbottom
+\widowpenalty=10000
+\clubpenalty=10000
+\pretocmd{\section}{\clearpage}{}{}
+\pretocmd{\subsection}{\Needspace{10\baselineskip}}{}{}
+\pretocmd{\subsubsection}{\Needspace{5\baselineskip}}{}{}
 \titleformat{\section}{\Large\bfseries\color{BrandBlue}}{\thesection}{.7em}{}
 \titleformat{\subsection}{\large\bfseries\color{BrandInk}}{\thesubsection}{.7em}{}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{BrandBlue}\textbf{ISMS}}
+\setlength{\headheight}{14mm}
+\fancyhead[L]{\includegraphics[height=10mm]{assets/company-logo.png}}
 \fancyhead[R]{\small\color{BrandInk}\nouppercase{\leftmark}}
-\fancyfoot[C]{\small\color{BrandInk}\thepage}
+\providecommand{\pdfpackdate}{}
+\providecommand{\pdfpackversion}{}
+\fancyfoot[L]{\small\color{BrandInk}Created \pdfpackdate}
+\fancyfoot[C]{\small\color{BrandInk}Version \pdfpackversion}
+\fancyfoot[R]{\small\color{BrandInk}\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\headrule}{\hbox to\headwidth{\color{BrandRule}\leaders\hrule height \headrulewidth\hfill}}
-\fancypagestyle{plain}{\pagestyle{fancy}}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[L]{\includegraphics[height=10mm]{assets/company-logo.png}}
+  \fancyhead[R]{\small\color{BrandInk}\nouppercase{\leftmark}}
+  \fancyfoot[L]{\small\color{BrandInk}Created \pdfpackdate}
+  \fancyfoot[C]{\small\color{BrandInk}Version \pdfpackversion}
+  \fancyfoot[R]{\small\color{BrandInk}\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\headrule}{\hbox to\headwidth{\color{BrandRule}\leaders\hrule height \headrulewidth\hfill}}
+}
+% pdflscape rotates its page view after TeX has placed fancyhdr's portrait
+% chrome. Draw equivalent chrome in the landscape content area instead.
+\newif\ifpdfpacklandscape
+\ExplSyntaxOn
+\coffin_new:N \g_pdfpack_landscape_header_coffin
+\coffin_new:N \g_pdfpack_landscape_footer_coffin
+\dim_new:N \g_pdfpack_textwidth_dim
+\dim_new:N \g_pdfpack_textheight_dim
+\hook_gput_code:nnn { begindocument/end } { . }
+  { \dim_gset:Nn \g_pdfpack_textwidth_dim { \textwidth }
+    \dim_gset:Nn \g_pdfpack_textheight_dim { \textheight } }
+\hook_gput_code:nnn { env/landscape/begin } { . }
+  { \pdfpacklandscapetrue
+    \addtolength{\topmargin}{12mm}
+    \addtolength{\textheight}{-24mm}
+    \thispagestyle{empty} \pagestyle{empty} }
+\hook_gput_code:nnn { shipout/foreground } { . }
+  {
+    \ifpdfpacklandscape
+      \vcoffin_set:Nnn \g_pdfpack_landscape_header_coffin { \g_pdfpack_textheight_dim }
+        { \includegraphics[height=7mm]{assets/company-logo.png}\hfill\small\color{BrandInk}\leftmark }
+      \coffin_rotate:Nn \g_pdfpack_landscape_header_coffin { 90 }
+      \put (\dim_eval:n { \oddsidemargin + 1in - \headsep },
+            \dim_eval:n { -1in - \topmargin - .5\g_pdfpack_textheight_dim - \headheight - \headsep })
+        { \coffin_typeset:Nnnnn \g_pdfpack_landscape_header_coffin { b } { hc } { 0pt } { 0pt } }
+      \vcoffin_set:Nnn \g_pdfpack_landscape_footer_coffin { \g_pdfpack_textheight_dim }
+        { \small\color{BrandInk}Created~\pdfpackdate\hfill Version~\pdfpackversion\hfill \thepage }
+      \coffin_rotate:Nn \g_pdfpack_landscape_footer_coffin { 90 }
+      \put (\dim_eval:n { \footskip + \oddsidemargin + 1in + \g_pdfpack_textwidth_dim },
+            \dim_eval:n { -1in - \topmargin - .5\g_pdfpack_textheight_dim - \headheight - \headsep })
+        { \coffin_typeset:Nnnnn \g_pdfpack_landscape_footer_coffin { t } { hc } { 0pt } { 0pt } }
+    \fi
+  }
+\ExplSyntaxOff

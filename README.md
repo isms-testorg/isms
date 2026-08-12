@@ -67,10 +67,11 @@ for `make pdf` and `make pack` only; CI installs them for releases.
 
 ### PDF branding
 
-PDFs use the logo at `assets/company-logo.png`, TeX Gyre typography, blue
-section accents, and branded headers. Replace that PNG to use the production
-logo; edit `tools/pdf-theme.tex` for fonts and colours. Tables with 12 or
-more data rows automatically start on landscape pages and may continue across
+PDFs use Source Sans 3 (bundled in `assets/fonts/`), the logo at
+`assets/company-logo.png`, blue section accents, branded headers, and dated
+versioned footers. Replace that PNG to use the production logo; edit
+`tools/pdf-theme.tex` for colours. Tables with 12 or more data rows or six or
+more columns automatically start on landscape pages and may continue across
 further landscape pages.
 
 ## Document frontmatter
