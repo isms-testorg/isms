@@ -16,7 +16,7 @@ import os
 import subprocess
 import sys
 
-from isms import LANGS, ROOT, band_for, evidence_files, load_controls, load_docs, load_yaml
+from isms import LANGS, ROOT, band_for, load_controls, load_docs, load_yaml
 
 T = {
     "en": {
@@ -344,14 +344,12 @@ def render_evidence(m: Model, lang: str, commit: str) -> str:
     out = header(t, t["ev_title"], t["ev_intro"], commit)
     rows = []
     for item in m.evidence:
-        matches = evidence_files(item.get("path", ""))
-        newest = max((os.path.basename(os.path.dirname(p)) for p in matches), default="")
         rows.append([item["id"], item.get(f"title_{lang}"),
-                     item.get("path", "").removeprefix("evidence/"), newest or t["not_recorded"],
+                     item.get("path", "").removeprefix("evidence/"),
                      f"{item.get('valid_months', '')} {t['months']}",
                      item.get("collector") or t["manual"],
                      ", ".join(item.get("controls") or [])])
-    out += table(["ID", t["title"], f"{t['path']} (evidence root)", t["newest"], t["valid"],
+    out += table(["ID", t["title"], f"{t['path']} (evidence root)", t["valid"],
                   t["collector"], t["control"]], rows)
     return "\n".join(out)
 
