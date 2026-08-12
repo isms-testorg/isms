@@ -3,11 +3,16 @@
 local LARGE_TABLE_ROWS = 12
 local WIDE_TABLE_COLUMNS = 6
 
-local function is_large(table)
+local function row_count(table)
   local rows = 0
   for _, body in ipairs(table.bodies) do
     rows = rows + #body.body
   end
+  return rows
+end
+
+local function is_large(table)
+  local rows = row_count(table)
   return rows >= LARGE_TABLE_ROWS
     or (#table.colspecs >= WIDE_TABLE_COLUMNS and rows >= 6)
 end
@@ -22,8 +27,16 @@ function Pandoc(doc)
   end
 
   local blocks = {}
-  for _, block in ipairs(doc.blocks) do
-    if block.t == "Table" and is_large(block) then
+  for index, block in ipairs(doc.blocks) do
+    local next_block = doc.blocks[index + 1]
+    if block.t == "Header" and next_block and next_block.t == "Table" and is_compact(next_block) then
+      -- Keep one generated key/value record together. Its table can fit on a
+      -- page, but longtable otherwise starts it in the remaining space and
+      -- leaves the tail on the next page.
+      local lines = math.min(34, row_count(next_block) * 3 + 2)
+      table.insert(blocks, pandoc.RawBlock("latex", "\\Needspace{" .. lines .. "\\baselineskip}"))
+      table.insert(blocks, block)
+    elseif block.t == "Table" and is_large(block) then
       -- Keep a table's label with its landscape table instead of leaving it
       -- alone on the preceding portrait page.
       local heading = blocks[#blocks]
