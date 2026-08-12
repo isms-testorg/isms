@@ -2,6 +2,7 @@
 -- many pages as needed through Pandoc's normal longtable output.
 local LARGE_TABLE_ROWS = 12
 local WIDE_TABLE_COLUMNS = 6
+local WORD_BREAK_LENGTH = 14
 
 local function row_count(table)
   local rows = 0
@@ -22,14 +23,35 @@ local function is_compact(table)
   return #table.colspecs == 2
 end
 
-local function wrap_columns(table)
-  local columns = #table.colspecs
+local function wrap_columns(tbl)
+  local columns = #tbl.colspecs
   if columns < 3 then
-    return
+    return tbl
   end
   for column = 1, columns do
-    table.colspecs[column][2] = 1 / columns
+    tbl.colspecs[column][2] = 1 / columns
   end
+  return tbl:walk({
+    Str = function(word)
+      if utf8.len(word.text) <= WORD_BREAK_LENGTH then
+        return nil
+      end
+      local parts, start, length = {}, 1, 0
+      for position in utf8.codes(word.text) do
+        length = length + 1
+        if length == WORD_BREAK_LENGTH then
+          local next_position = utf8.offset(word.text, 2, position)
+          if next_position then
+            table.insert(parts, pandoc.Str(word.text:sub(start, next_position - 1)))
+            table.insert(parts, pandoc.RawInline("latex", "\\allowbreak"))
+            start, length = next_position, 0
+          end
+        end
+      end
+      table.insert(parts, pandoc.Str(word.text:sub(start)))
+      return parts
+    end,
+  })
 end
 
 function Pandoc(doc)
@@ -43,7 +65,7 @@ function Pandoc(doc)
     if block.t == "Table" then
       -- Markdown defaults to natural-width LaTeX columns. That lets long
       -- German text run into its neighbour instead of wrapping.
-      wrap_columns(block)
+      block = wrap_columns(block)
     end
     if block.t == "Header" and next_block and next_block.t == "Table"
       and is_compact(next_block) and row_count(next_block) <= 8 then
