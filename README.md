@@ -142,9 +142,25 @@ convention into a rule.
 
 **4. Organisation token.** `evidence-collect` needs to read organisation
 members and their 2FA state, which the default `GITHUB_TOKEN` cannot do.
-Create a fine-grained PAT or GitHub App with organisation read permissions and
-add it as the `ISMS_ORG_TOKEN` repository secret. Without it the workflow still
-runs and records exactly what it could not read.
+Create a fine-grained PAT owned by an organisation owner, grant it access to
+all repositories that should be collected, and add it as the
+`ISMS_ORG_TOKEN` repository secret. The PAT needs:
+
+- **Organisation permissions:** `Members: read`.
+- **Repository permissions:** `Metadata: read`, `Administration: read`,
+  `Dependabot alerts: read`, and `Secret scanning alerts: read`.
+
+For a classic PAT, use the equivalent `read:org` scope and make sure the token
+owner is an organisation owner. Without the repository permissions, the
+workflow can still collect members and repositories, but branch protection,
+Dependabot alerts, and secret-scanning alerts are recorded as unavailable.
+Without the token, the workflow still runs and records exactly what it could
+not read.
+
+The separate **Settings → Actions → General → Workflow permissions** option
+**Allow GitHub Actions to create and approve pull requests** must also be
+enabled for the evidence workflow to open its pull request. This is independent
+of the PAT permissions above.
 
 **5. Fill in the content.** `make check` currently reports the real backlog:
 56 controls with no applicability decision, 25 documents still in draft, and
