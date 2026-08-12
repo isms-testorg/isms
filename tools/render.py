@@ -47,7 +47,7 @@ T = {
         "gaps": "Gaps", "no_gaps": "No gaps found.",
         "ev_title": "Evidence Index",
         "ev_intro": "Records held to demonstrate that controls operate, and how current they are.",
-        "files": "Files", "newest": "Newest", "valid": "Valid for",
+        "files": "Files", "path": "Path", "newest": "Newest", "valid": "Valid for",
         "months": "months", "collector": "Collector", "manual": "manual",
         "asset_title": "Asset Inventory",
         "asset_intro": "Asset groups per A.5.9, with owner and classification.",
@@ -93,7 +93,7 @@ T = {
         "gaps": "Lücken", "no_gaps": "Keine Lücken gefunden.",
         "ev_title": "Nachweisverzeichnis",
         "ev_intro": "Aufzeichnungen, die den Betrieb der Maßnahmen belegen, und ihre Aktualität.",
-        "files": "Dateien", "newest": "Neueste", "valid": "Gültig für",
+        "files": "Dateien", "path": "Pfad", "newest": "Neueste", "valid": "Gültig für",
         "months": "Monate", "collector": "Sammler", "manual": "manuell",
         "asset_title": "Werteverzeichnis",
         "asset_intro": "Wertegruppen nach A.5.9, mit Verantwortlichen und Klassifizierung.",
@@ -346,12 +346,12 @@ def render_evidence(m: Model, lang: str, commit: str) -> str:
     for item in m.evidence:
         matches = evidence_files(item.get("path", ""))
         newest = max((os.path.basename(os.path.dirname(p)) for p in matches), default="")
-        rows.append([item["id"], item.get(f"title_{lang}"), item.get("path"),
-                     len(matches), newest or t["not_recorded"],
+        rows.append([item["id"], item.get(f"title_{lang}"),
+                     f"{item.get('path')} ({len(matches)})", newest or t["not_recorded"],
                      f"{item.get('valid_months', '')} {t['months']}",
                      item.get("collector") or t["manual"],
                      ", ".join(item.get("controls") or [])])
-    out += table(["ID", t["title"], "Path", t["files"], t["newest"], t["valid"],
+    out += table(["ID", t["title"], f"{t['path']} / {t['files']}", t["newest"], t["valid"],
                   t["collector"], t["control"]], rows)
     return "\n".join(out)
 

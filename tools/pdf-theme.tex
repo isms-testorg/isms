@@ -30,7 +30,13 @@
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
 \arrayrulecolor{BrandRule}
-\AtBeginEnvironment{longtable}{\renewcommand{\arraystretch}{1.45}\setlength{\tabcolsep}{4pt}\setlength{\extrarowheight}{1pt}}
+\newif\ifpdfpackcompacttable
+\AtBeginEnvironment{longtable}{%
+  \ifpdfpackcompacttable
+    \renewcommand{\arraystretch}{1.2}\setlength{\tabcolsep}{4pt}\setlength{\extrarowheight}{1pt}%
+  \else
+    \renewcommand{\arraystretch}{1.45}\setlength{\tabcolsep}{4pt}\setlength{\extrarowheight}{1pt}%
+  \fi}
 \raggedbottom
 \widowpenalty=10000
 \clubpenalty=10000

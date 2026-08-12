@@ -22,8 +22,11 @@ def main() -> None:
     assert "\\addtolength{\\textheight}{-24mm}" in theme
     landscape = Path(LANDSCAPE_TABLES).read_text(encoding="utf-8")
     assert "function Pandoc(doc)" in landscape
+    assert "rows >= 6" in landscape
+    assert "pdfpackcompacttabletrue" in landscape
     assert 'heading.t == "Header"' in landscape
     assert "pdfpacklandscapefalse" in landscape
+    assert "\\ifpdfpackcompacttable" in theme
     assert Path("assets/company-logo.png").is_file()
     for face in ("Regular", "Semibold", "It", "SemiboldIt"):
         assert Path(f"assets/fonts/SourceSans3-{face}.otf").is_file()

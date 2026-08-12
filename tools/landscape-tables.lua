@@ -8,7 +8,12 @@ local function is_large(table)
   for _, body in ipairs(table.bodies) do
     rows = rows + #body.body
   end
-  return rows >= LARGE_TABLE_ROWS or #table.colspecs >= WIDE_TABLE_COLUMNS
+  return rows >= LARGE_TABLE_ROWS
+    or (#table.colspecs >= WIDE_TABLE_COLUMNS and rows >= 6)
+end
+
+local function is_compact(table)
+  return #table.colspecs == 2
 end
 
 function Pandoc(doc)
@@ -32,6 +37,13 @@ function Pandoc(doc)
       table.insert(blocks, block)
       table.insert(blocks, pandoc.RawBlock(
         "latex", "\\end{landscape}\\clearpage\\pdfpacklandscapefalse\\pagestyle{fancy}"))
+    elseif block.t == "Table" and is_compact(block) then
+      -- Record-detail tables need less vertical padding than wide indexes. The
+      -- former otherwise split across pages despite fitting when laid out as a
+      -- compact key/value record.
+      table.insert(blocks, pandoc.RawBlock("latex", "\\pdfpackcompacttabletrue"))
+      table.insert(blocks, block)
+      table.insert(blocks, pandoc.RawBlock("latex", "\\pdfpackcompacttablefalse"))
     else
       table.insert(blocks, block)
     end
