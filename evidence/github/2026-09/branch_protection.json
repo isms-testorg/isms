@@ -1,0 +1,26 @@
+{
+  "branches": [
+    {
+      "allow_force_pushes": false,
+      "branch": "main",
+      "dismiss_stale_reviews": true,
+      "enforce_admins": true,
+      "protected": true,
+      "repository": "isms",
+      "require_code_owner_reviews": true,
+      "required_approving_review_count": 1,
+      "required_signatures": true,
+      "required_status_checks": [
+        "validate"
+      ]
+    }
+  ],
+  "collected_at": "2026-09-01T08:13:36+00:00",
+  "collected_by": "evidence-collect",
+  "evidence_kind": "default branch protection and required reviews",
+  "organisation": "isms-testorg",
+  "protected_count": 1,
+  "source": "GitHub REST API",
+  "unavailable": [],
+  "unprotected": []
+}

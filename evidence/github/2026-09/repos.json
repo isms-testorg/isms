@@ -1,0 +1,20 @@
+{
+  "collected_at": "2026-09-01T08:13:35+00:00",
+  "collected_by": "evidence-collect",
+  "count": 1,
+  "evidence_kind": "repository inventory and visibility",
+  "organisation": "isms-testorg",
+  "private_count": 0,
+  "repositories": [
+    {
+      "archived": false,
+      "default_branch": "main",
+      "has_issues": true,
+      "name": "isms",
+      "pushed_at": "2026-08-12T14:54:54Z",
+      "visibility": "public"
+    }
+  ],
+  "source": "GitHub REST API",
+  "unavailable": []
+}

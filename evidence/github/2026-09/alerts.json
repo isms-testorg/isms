@@ -1,0 +1,23 @@
+{
+  "collected_at": "2026-09-01T08:13:36+00:00",
+  "collected_by": "evidence-collect",
+  "dependabot_open_total": 0,
+  "evidence_kind": "open vulnerability and secret scanning alerts",
+  "organisation": "isms-testorg",
+  "repositories": [
+    {
+      "dependabot": {
+        "by_severity": {},
+        "oldest_open_days": 0,
+        "open": 0
+      },
+      "repository": "isms",
+      "secret_scanning": {
+        "unavailable": "gh: Secret scanning is disabled on this repository. (HTTP 404)"
+      }
+    }
+  ],
+  "secret_scanning_open_total": 0,
+  "source": "GitHub REST API",
+  "unavailable": []
+}
